@@ -17,13 +17,7 @@ public class DecentNumbers {
                 System.out.println(33333);
                 return;
             }
-            
-            //int numberFives = 0;
-            //int numberThrees = 0;
-            
-            
-
-            
+              
             int numberOfPossible5s = n / 3;
             int numberOfPossible3s = 0;
             boolean possibilityFound = false;
@@ -48,17 +42,11 @@ public class DecentNumbers {
                 String repeated5 = new String(new char[numberOfPossible5s]).replace("\0", "5");
                 String repeated3 = new String(new char[numberOfPossible3s]).replace("\0", "3");          
                 System.out.print(repeated5+repeated3);    
+                
             }else{
                 System.out.print("-1");
             }
-            // for(int r = 0; r < numberOfPossible5s;r++){
-            //     System.out.print("5");
-            // }
-            
-            // for(int r = 0; r < numberOfPossible3s;r++){
-            //     System.out.print("3");
-            // }
-          
+  
             System.out.println();
             
         }
