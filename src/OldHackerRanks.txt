@@ -1,0 +1,834 @@
+Old Hacker Problems
+
+int simpleArraySum(vector<int> ar) {
+    
+    int total = 0;
+
+    for(int runner = 0; runner < ar.size();runner++){
+        total += ar[runner];
+    }
+
+    return total;
+
+}
+
+
+vector<int> compareTriplets(vector<int> alicesScores, vector<int> bobsScores) {
+
+  vector<int>finalScores(2,0);
+  for (int runner = 0; runner < 3; runner++){
+
+      if(alicesScores[runner] > bobsScores[runner]){
+          finalScores[0] += 1;
+      }
+
+      if(bobsScores[runner] > alicesScores[runner]){
+          finalScores[1] += 1;
+      }
+  }
+
+
+  return finalScores;
+}
+
+
+
+int diagonalDifference(vector<vector<int>> arr) {
+
+
+    int topLeftDiagonal = 0;
+    int topRightDiagonal = 0;
+
+
+    int length = arr.size() - 1;
+
+    for(int runner = 0; runner < arr.size();runner++){
+        topLeftDiagonal += arr[runner][runner];
+        topRightDiagonal += arr[runner][length];
+
+        length--;
+    }
+
+    return abs(topLeftDiagonal - topRightDiagonal);
+
+}
+
+void miniMaxSum(vector<int> arr) {
+
+    
+
+    long lowest = arr[0];
+    long highest = arr[0];
+    long total = 0;
+
+
+    for(int runner = 0; runner <= arr.size() - 1;runner++){
+       // cout << arr[runner] << " ";
+
+        if(lowest > arr[runner]){
+            lowest = arr[runner];
+        }
+
+        if(highest < arr[runner]){
+            highest = arr[runner];
+        }
+
+        total += arr[runner];
+    }
+
+    /*
+    cout << endl;
+    cout << "High: " << (total - lowest) << endl;
+    cout << "Low: " << (total - highest) << endl;
+    */ 
+
+    cout <<   (total - highest) << " " << (total - lowest) << endl;
+}
+
+
+int birthdayCakeCandles(vector<int> ar) {
+    int age = 0;
+    int candles = 0;
+
+    int runner2 = 1;
+    for(int runner = 0;runner < ar.size() - 1;runner++){
+        if(ar[runner2] > age){
+            age = ar[runner2];
+        }
+        runner2++;
+    }
+
+    cout << "Greatest Age: " << age;
+    for(int runner = 0; runner < ar.size();runner++){
+        if(ar[runner] == age){
+            candles++;
+        }
+    }
+
+    return candles;
+
+}
+
+string timeConversion(string time) {
+
+    //Get the hour of the time given
+    int refactoredTime = stoi(time.substr(0,2));
+    int length = time.size();
+
+    //Get the AM or PM designation
+    string amPm = time.substr(length - 2, length);
+
+    //Create the return variables subtracted the AM or PM
+    string frontTime = "";
+    string backTime = time.substr(2,length - 4);
+
+    
+    
+    if(amPm == "AM"){
+        
+        if(refactoredTime < 10){
+
+            frontTime = "0" + to_string(refactoredTime);
+            frontTime += backTime;
+
+        }if(refactoredTime == 12){
+
+            frontTime = "00" ;
+            frontTime += backTime;
+
+            
+        }else if(!refactoredTime < 10 && !refactoredTime == 12){
+
+            frontTime = to_string(refactoredTime);
+            frontTime += backTime;
+
+            
+        }
+
+    }
+
+    if(amPm == "PM"){
+
+        if(12 > refactoredTime){
+
+            refactoredTime += 12;
+            frontTime = to_string(refactoredTime);
+            frontTime += backTime;
+        
+        }
+
+        if(12 == refactoredTime){
+
+            refactoredTime = 12;
+            frontTime = to_string(refactoredTime);
+            frontTime += backTime;
+        
+        }
+
+    }
+   
+    
+    return frontTime;
+}
+
+vector<int> gradingStudents(vector<int> grades) {
+
+    int gradeHolder = 0;
+
+     for(int gradeIndex = 0; gradeIndex < grades.size();gradeIndex++){
+         gradeHolder = grades[gradeIndex];  
+
+         if(gradeHolder < 38){
+             grades[gradeIndex] = gradeHolder;
+         }
+
+         if(gradeHolder % 5 > 2 && !(gradeHolder < 38)){
+             grades[gradeIndex] = (gradeHolder - (gradeHolder % 5)) + 5;
+         }
+
+     }   
+
+    return grades;
+}
+
+vector<int> gradingStudents(vector<int> grades) {
+
+    int gradeHolder = 0;
+
+     for(int gradeIndex = 0; gradeIndex < grades.size();gradeIndex++){
+         gradeHolder = grades[gradeIndex];  
+
+         if(gradeHolder < 38){
+             grades[gradeIndex] = gradeHolder;
+         }
+
+         if(gradeHolder % 5 > 2 && !(gradeHolder < 38)){
+             grades[gradeIndex] = (gradeHolder - (gradeHolder % 5)) + 5;
+         }
+
+     }   
+
+    return grades;
+}
+
+
+void countApplesAndOranges(int samHouseStart, int samHouseEnd, int appleTreePos, int orangeTreePos, vector<int> appleTree, vector<int> orangeTree) {
+
+    int totalApples = 0;
+    int totalOranges = 0;
+    int item = 0;
+
+/*
+    cout << "Sams House Start: " << samHouseStart << endl;
+    cout << "Sams House End: " << samHouseEnd << endl;
+    
+    cout << "Apple Start: " << appleTreePos<< endl;
+    cout << "Orange Start: " << orangeTreePos << endl;
+
+    
+*/
+
+    for(int runner = 0; runner < appleTree.size(); runner++){
+        
+        item = appleTree[runner] + appleTreePos;
+        //cout << "Apple : " << item << endl;
+
+        if(item <= samHouseEnd && item >= samHouseStart)
+        totalApples++;
+    }
+
+    
+
+    for(int runner = 0; runner < orangeTree.size();runner++){
+       
+        item = orangeTree[runner] + orangeTreePos;
+        //cout << "Orange : " << item << endl;
+
+        if(item <= samHouseEnd && item >= samHouseStart)
+        totalOranges++;
+       
+    }
+
+    cout << totalApples << endl;
+    cout << totalOranges << endl;
+
+
+
+    
+
+}
+
+
+string kangaroo(int x1, int v1, int x2, int v2) {
+
+    for(int runner = 0; runner < 10000;runner++){
+        if(x1 == x2){
+            return "YES";
+        }
+
+        x1 += v1;
+        x2 += v2;
+    }
+    
+    return "NO";
+}
+
+
+int divisibleSumPairs(int n, int k, vector<int> ar) {
+
+    int numbers = 0;
+    int value = 0;
+    int x = 0;
+    int y = 0;
+
+    for(int runner = 0; runner < ar.size();runner++){
+        for(int internalRunner = runner; internalRunner < ar.size();internalRunner++){
+
+
+            x = ar[runner];    
+            y = ar[internalRunner];
+
+            value = x + y;
+
+            if((value == k || value % k == 0) && runner != internalRunner){
+                numbers++;
+                cout << numbers << endl;
+                cout<< "Runner: " << runner << " Internal Runner: " << internalRunner                    <<endl;
+
+                cout << ar[runner] + ar[internalRunner] << endl;
+
+            }
+        }
+
+
+    }
+
+    return numbers;
+
+}
+
+int migratoryBirds(vector<int> birdList) { 
+
+    vector<int> birdCounter(5,0);
+    
+    int birdIndexValue = 0;
+    int currentBirdValue = 1;
+    int greatestBirdValue = 0;
+    int birdIndexToReturn = 0;
+
+    for (int birdListRunner = 0; birdListRunner < birdList.size();birdListRunner++){
+
+
+        //HOW DOES INDEX 5 GET ASSINGED TO 53 in this case.
+        /*
+        11
+        1 2 3 4 5 4 3 2 1 3 4
+        */
+
+        birdIndexValue = birdList[birdListRunner];
+      
+        cout << birdIndexValue << endl;
+
+        birdCounter[birdIndexValue] += 1;
+
+    }
+
+
+
+    for (int birdListRunner = birdCounter.size(); birdListRunner > 0;birdListRunner--){
+
+        currentBirdValue = birdCounter[birdListRunner];
+
+        if(currentBirdValue >= greatestBirdValue){
+            greatestBirdValue = currentBirdValue;
+            birdIndexToReturn = birdListRunner;
+        }
+        
+
+            
+
+        cout << "Birds at index " << birdListRunner << " : " << birdCounter[birdListRunner] << endl;
+        
+
+
+    }
+
+
+    return birdIndexToReturn;
+}
+
+string dayOfProgrammer(int year) {
+
+    
+    int months = 215;
+    int feb = 28;
+
+    int day = 0;
+
+    
+
+    if(year >=  1700 && year <= 1917){
+        if(year % 4 == 0){
+            feb = 29;
+        }
+    }else{
+       if(year % 400 == 0 ){
+            feb = 29;
+       }
+
+         if(year % 4 == 0 && year % 100 != 0){
+             feb = 29;
+         }
+
+       
+
+    }
+
+    if(year == 1918){
+        feb = 15;
+    }
+
+
+
+    cout << "Feb: " << feb;
+
+    day = 256 - (months + feb);
+
+    
+
+    
+
+    
+    return (to_string(day) + ".09." + to_string(year));
+
+
+}
+
+int pageCount(int bookLength, int page) {
+  /*
+   * Write your code here.
+   */
+
+    
+
+        int value = (bookLength / 2) - (page/2);
+        int valuex = page / 2;
+
+        
+        if(value < valuex){
+            return value;
+        }else{
+            return valuex;
+        }
+    
+}
+
+int countingValleys(int n, string s) {
+
+    
+    string comp = "";
+    int stepDesc = 0;
+
+    int valleys = 0;
+
+    for(int runner = 0; runner < n;runner++){
+
+        comp = s[runner];
+
+        if(comp.compare("U") == 0){
+            stepDesc++; 
+
+        if(stepDesc == 0){
+            valleys++;
+        }
+
+
+        }else if(comp.compare("D") == 0){
+            stepDesc--;
+
+      
+
+        }else{
+
+        }
+
+       
+    }
+
+    
+    return valleys;
+
+
+}
+
+int getMoneySpent(vector<int> keyboards, vector<int> drives, int b) {
+
+    int spent = -1;
+
+    
+    for(int runner = 0;runner < keyboards.size()  ;runner++){
+        for(int runner2 = 0; runner2 < drives.size() ;runner2++){
+
+            if(drives[runner2] + keyboards[runner] <= b && drives[runner2] + keyboards                  [runner] > spent){
+                spent = drives[runner2] + keyboards[runner];
+                   
+            }
+
+
+        }
+
+        
+    }
+    
+
+
+    cout << "Money Spent: " << spent;
+    return spent;
+
+
+
+}
+
+string catAndMouse(int catA, int catB, int mouseC) {
+    string winner = "";
+
+  if ((abs(catA - mouseC)) < (abs(catB - mouseC))) {
+    winner = "Cat A"; 
+  }else if((abs(catB - mouseC)) < (abs(catA - mouseC))){
+    winner = "Cat B"; 
+  }else{
+    winner = "Mouse C"; 
+  }
+
+  return winner;
+}
+
+
+int designerPdfViewer(vector<int> heights, string word) { 
+
+    int length = word.length();
+    int target = 0;
+    int largestNumber = 0;
+
+    for(int wordRunner = 0; wordRunner < length; wordRunner++){
+        target = (word[wordRunner] - 96) - 1;
+
+        cout << target << " " << endl;
+
+        if(heights[target] > largestNumber){
+            largestNumber = heights[target];
+        }
+
+        cout << "Largest: " << largestNumber << endl;
+        
+    }
+    
+
+
+
+    return (largestNumber * length);
+}
+
+
+string angryProfessor(int cancelationNumber, vector<int> studentArivalTimes) {
+
+    int proffLimit = 0;
+    int classSize = studentArivalTimes.size();
+
+    for(int runner = 0; runner < classSize; runner++){
+        
+        if(studentArivalTimes[runner] > 1){
+            proffLimit ++;
+        }
+
+        if(proffLimit > (classSize - cancelationNumber)){
+            return "YES";
+        }
+
+
+    }
+
+    
+
+    return "NO";
+}
+
+int saveThePrisoner(int numberOfPrisoners, int sweets, int startChair) {
+
+    int finalNumber = sweets % numberOfPrisoners;
+
+    //cout << "Final Number: "  << finalNumber << endl;
+
+    startChair = startChair - 1;
+
+    return (startChair + finalNumber);
+
+}
+
+
+vector<int> circularArrayRotation(vector<int> listOfItems, int rotations, vector<int> queries) {
+
+   if(rotations > listOfItems.size()){
+       rotations = rotations % listOfItems.size();
+   }
+
+   vector<int> leftHandRotation;
+   vector<int> answers;
+   
+   int stopper = listOfItems.size() - rotations;
+
+   for(int runner = stopper; runner <= listOfItems.size() - 1; runner++){       
+       leftHandRotation.push_back(listOfItems[runner]);
+   }
+
+   for(int runner = 0; runner < stopper; runner++){
+       leftHandRotation.push_back(listOfItems[runner]);
+   }
+
+   int queryItem = 0;
+
+
+   for(int runner = 0; runner < queries.size();runner++){
+
+       queryItem = queries[runner];
+       answers.push_back(leftHandRotation[queryItem]);
+   }
+
+
+   
+   return answers;
+}
+
+int jumpingOnClouds(vector<int> clouds, int jumpSize) {
+
+    int energy = 100;
+    int length = clouds.size();
+    int backToStart = 0;
+    
+    
+    //Runner is the simple index reference but it must jump across the array 
+    //properly. When adding the index to the size of the jump and then modding it 
+    // by the length you ensure that it stays within the bounds of the array .
+
+
+    //We need the back to start array to ensure we do not break on the first case 
+    //where the runner should be assinged to 0 because we are at the start of the 
+    //array just begning our count.
+    for(int runner = 0;runner < length ;runner = (runner + jumpSize) % length){
+
+        if(runner == 0 && backToStart != 0){
+            break;
+        }
+
+        cout << "Runner " << runner << endl;
+        cout << "Energy " << energy << endl;
+
+        
+
+        if(clouds[runner] == 0){
+            energy--;
+        }
+
+        if(clouds[runner] == 1){
+            energy -=3;
+        }
+
+        
+        
+        backToStart = 1;
+    }
+     
+    
+    return energy;
+}
+
+int minimumDistances(vector<int> minDistance) {
+
+    vector<int> pairsOfValues;
+    int size = minDistance.size();
+    int potentialLowest;
+    int lowest = 2147483647;
+
+
+    for(int runner = 0; runner < size; runner++){
+        for(int pairRunner = runner + 1; pairRunner < size; pairRunner++){
+
+            if(minDistance[runner] == minDistance[pairRunner]){
+            
+                potentialLowest = abs(pairRunner - runner);
+
+                if(potentialLowest < lowest){
+                    lowest = potentialLowest;
+                }
+            }
+
+        }
+
+        cout << endl;
+    }
+    
+    if(lowest == 2147483647){
+        lowest = -1;
+    }
+
+    return lowest;
+}
+
+string caesarCipher(string s, int k) {
+
+    
+
+    //{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s''t','u','v','w','x','y','z'};
+
+    vector<char> sentence;
+    string tester = "";
+    int trueK = k % 26;
+
+
+
+    for(int runner = 0; runner < s.size();runner++){
+
+        int charaterWithoutK = s[runner];
+        int charaterWithK = 0;
+
+
+        if(charaterWithoutK >= 65 && charaterWithoutK <= 90){
+
+            charaterWithK = charaterWithoutK  + trueK;
+
+            if(charaterWithK > 90 && charaterWithK < 115){
+                charaterWithK = charaterWithK - 26;
+                tester += char(charaterWithK);
+            }else{
+                tester += char(charaterWithK);
+            }
+
+        } else if(charaterWithoutK >= 97 && charaterWithoutK <= 122){
+
+            charaterWithK = charaterWithoutK  + trueK;
+            if(charaterWithK > 122 && charaterWithK < 147){
+                charaterWithK = charaterWithK - 26;
+                tester += char(charaterWithK);
+            }else{
+                tester += char(charaterWithK);
+            }
+            
+        }else{
+            tester += char(charaterWithoutK);
+        }
+
+    }
+
+    
+
+    return tester;
+}
+
+
+string hackerrankInString(string s) {
+
+    if(s.size() < 9){
+        return "NO";
+    }
+
+    string word = "hackerrank";
+    int counter = 0;
+
+    for(int runner = 0; runner < s.size();runner++){
+        if(word[counter] == s[runner]){
+            counter++;
+
+            if(counter >= 9){
+                return "YES";
+            }
+        }
+    }
+
+    return "NO";
+
+}
+
+int lonelyinteger(vector<int> a) {
+    
+    int lonelyInt = 0;
+    
+    if(a.size() == 1){
+        return a[0];
+    }
+    
+    for(int runner = 0; runner < a.size();runner++){
+        //cout << a[runner] << " " <<endl;
+        cout << endl;
+        for(int runnerTwo = 0; runnerTwo < a.size();runnerTwo++){
+            
+            //cout << a[runner] << " checks " << a[runnerTwo] << " ";
+            if(runner == runnerTwo){
+                runnerTwo++;
+            }
+            
+            if(a[runner] != a[runnerTwo] && runnerTwo + 1 >= a.size()){
+                lonelyInt = a[runner];
+                return a[runner];
+            }else if(a[runner] == a[runnerTwo]){
+                break;
+            }    
+         
+        }
+        
+        
+    }
+    return lonelyInt;
+}
+
+
+int maximizingXor(int l, int r) {
+    
+  int maxXOR = 0;
+  int current = l;
+
+  for(int runner = l;runner <= r; runner++){
+      for(int secondRunner = current; secondRunner <= r; secondRunner++){
+        
+        // cout << "Runner : " << runner << " Second Runner : " << secondRunner <<endl;
+        // cout << "Calculation: " << (secondRunner ^ r) <<endl;
+                  
+          if((secondRunner ^ runner) > maxXOR){
+              maxXOR = (secondRunner ^ runner);
+          }
+      }
+      
+      current++;
+      cout << endl;
+  }
+  
+  return maxXOR;
+}
+
+
+long sumXor(long n) {
+    
+   
+    int ans = 0;
+    
+    while (n > 0){
+       if (n % 2 == 0) ans++;
+       n /= 2;
+    }
+
+    return pow (2 , ans);
+
+}
+
+
+string strings_xor(string s, string t) {
+
+    string res = "";
+    for(int i = 0; i < s.size(); i++) {
+        if(s[i] == t[i])
+            res += '0';
+        else
+            res += '1';
+    }
+
+    return res;
+}
