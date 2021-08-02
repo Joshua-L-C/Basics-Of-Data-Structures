@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 
 public class DecentNumbers {
 
@@ -51,15 +52,105 @@ public class DecentNumbers {
             
         }
     }
-       
     
+    public static String appendAndDelete(String originString, String templateString, int k) {
+        
+        int originStringLeng = originString.length() - 1;
+        int templateStringLeng = templateString.length() - 1;
+        
+        int unequalPoint = 0;
+        
+        
+        
+        for(int runner = 0; originString.charAt(runner) == templateString.charAt(runner) && runner < originStringLeng && runner < templateStringLeng ;runner++){
+            System.out.println(originString.charAt(runner));
+            unequalPoint = runner;
+        }
+        
+        if(unequalPoint == templateStringLeng && unequalPoint == originStringLeng){
+            return "Yes";
+        }
+            
+            int x = originStringLeng - unequalPoint;
+            int y = templateStringLeng - unequalPoint;
+
+        
+        //System.out.println("Spaces: " +spaces);
+        if(x + y <= k){
+            return "Yes";
+        }else{
+            return "No";    
+        }
+        
+    }
+    
+    
+    
+  public static void kaprekarNumbers(int p, int q) {
+        
+	   String possibleKString = "";
+       int possibleKSleng = 0;
+       BigInteger possibleKN = new BigInteger("0");
+       int left = 0;
+       int right = 0;
+       int mid = 0;
+       boolean oneFound = false;
+       
+       for(int runner = p; runner < q; runner++){
+           
+    	   possibleKString = (runner * runner) + "";
+           possibleKN =  new BigInteger(possibleKString);
+           
+           possibleKSleng = possibleKString.length();
+           mid = possibleKSleng/2;
+           
+           if(possibleKString.substring(0,mid).equals("")){
+               left = 0;    
+           }else{
+               left = Integer.parseInt(possibleKString.substring(0,mid));    
+           }
+           
+           right = Integer.parseInt(possibleKString.substring(mid,possibleKSleng));
+           
+    
+               // System.out.println("Runner: " + runner);
+               // System.out.println("Number: " + possibleKString);    
+               // System.out.println("String Length: " + possibleKSleng);
+               // System.out.println("Mid Point: " + mid);
+               // System.out.println("Char At Mid: " + possibleKString.charAt(mid));
+               // System.out.println("Possible Left "+ left);
+               // System.out.println("Possible Right " + right );
+           
+           if((left + right) == runner){
+               System.out.print(runner + " ");
+               oneFound = true;
+           }
+           
+           
+          
+           // System.out.println();
+       }
+       
+       if(!oneFound){
+           System.out.print("INVALID RANGE");
+       }
+       
+   
+ 
+
+    }
     
     
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		decentNumber(15);
-
+		//decentNumber(15);
+		
+		kaprekarNumbers(1, 99999);
+		
+		System.out.println(77777 * 77777);
+		
+		System.out.println(99999*99999);
 	}
 
 }
