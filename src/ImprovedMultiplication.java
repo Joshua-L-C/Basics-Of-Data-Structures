@@ -41,9 +41,13 @@ public class ImprovedMultiplication {
 		int lengthOfBottom = (int)Math.log10(bottom) + 1;
 	
 		int multiplier = 0;
+		
 		int calculatedValue = 0;
 		int totalCalculatedValue = 0;
+		
 		int spaceZero = 0;
+		String currentCalculatedValue = "";
+		String priorCalculatedValue = "";
 		String repeated = "";
 		
 		
@@ -55,6 +59,9 @@ public class ImprovedMultiplication {
 			
 			spaceZero = ((outer % 10) - 1);
 			
+			if(outer == lengthOfBottom) {
+				repeated += "\n";
+			}
 			
 			
 			for(int runner = lengthOfTop, spaces = 1 ;runner >= 1; runner-- , spaces++) {
@@ -63,16 +70,32 @@ public class ImprovedMultiplication {
 				
 				calculatedValue = (top / (int)Math.pow(10, runner - 1) % 10) * multiplier * (int)Math.pow(10, (runner -1) + (spaceZero))  ;
 				
+				currentCalculatedValue = calculatedValue +"";
 				totalCalculatedValue += calculatedValue;
-			
-				repeated += calculatedValue;
+				
+				
+				if(runner == lengthOfTop) {
+					priorCalculatedValue = calculatedValue + "";
+					repeated += priorCalculatedValue;
+				}else {
+					
+					int numberOfSpacesToAdd = priorCalculatedValue.length() - currentCalculatedValue.length();
+					
+					currentCalculatedValue =  (new String(new char[numberOfSpacesToAdd]).replace("\0", " ")) + currentCalculatedValue;
+					priorCalculatedValue =  currentCalculatedValue;
+					
+					repeated += currentCalculatedValue;
+					
+					
+				}
+				
 				repeated += "\n";
 				
-			
 			}
 			
-			repeated += "\n";
+			repeated += (new String(new char[(totalCalculatedValue+"").length()]).replace("\0","_"))+"\n";
 			repeated += totalCalculatedValue;
+			repeated += "\n";
 			repeated += "\n";
 			
 			totalCalculatedValue = 0;
@@ -92,7 +115,7 @@ public class ImprovedMultiplication {
 	public static void main(String[] args) {
 		
 		
-		System.out.println(multiplicationExplaied(912, 9));
+		System.out.println(multiplicationExplaied(912, 39));
 //		System.out.println((275 - (275 % 100))/ 100  );
 //		System.out.println((275 % 10) );
 		//System.out.println(multiplicationExplaied(55, 55));

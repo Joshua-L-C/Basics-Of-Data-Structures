@@ -1,0 +1,35 @@
+Big-O Notation:
+Time Complexity: how many steps does this algorithm take to complete its task.
+Memory Complexity: how much memory does this algorithm use to complete its tasks.
+
+Compare worst case scenarios to get the best representation of Algorithms.
+
+
+Add Sugar to Tea (Simplified Algo)
+{
+1. Fetch the bowl containing the sugar
+2. Get a spoon
+3. Scoop out sugar using the spoon
+4. Pour the sugar from the spoon into the tea
+5. Repeat steps 3 and 4 until you'ev added the desired amount of sugar
+
+Number of Sugars        Steps Required
+1						4
+2						6
+3						8
+4						10
+
+Number of desired sugars = n
+Total number of steps = 2n + 2
+As n grows, the number of steps grows
+The "2" in 2n is steps 3 and 4 and steps 1 and 2 are represented by "+ 2" because these
+are constant regardless of the input. The n value determines the growth rate
+Time complexity is O(n)
+
+
+Big-o
+O(n)		 Constant
+O(log^2(n))  Logarithmic base 2
+O(n)		 Linear
+O(nlog^2(n)) n log-star n
+O(n^2)		 Quadratic
