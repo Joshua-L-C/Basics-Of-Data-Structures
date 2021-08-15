@@ -116,6 +116,8 @@ public class ImprovedMultiplication {
 		
 		
 		System.out.println(multiplicationExplaied(912, 39));
+		
+		System.out.println(multiplicationExplaied(39, 39));
 //		System.out.println((275 - (275 % 100))/ 100  );
 //		System.out.println((275 % 10) );
 		//System.out.println(multiplicationExplaied(55, 55));

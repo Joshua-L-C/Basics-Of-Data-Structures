@@ -25,6 +25,30 @@ public class Test {
 		 * ith element by using the following expression x + i * y;
 		 */
 		
+		int index = -1;
+		
+		for(int i = 0; i < intArray.length;i++) {
+		
+			if(intArray[i] == 7) {
+				index = i;
+				break;
+			}
+		}
+		
+		System.out.println("Index: "+index);
+		
+		
+		/*
+		 * Array Operations Time complexity
+		 * retrival with index 		       O(1)
+		 * retrival without index          O(n)
+		 * Add element to full array       O(n)
+		 * Add element to space array      O(1)
+		 * Update specific index           O(1)
+		 * Delete an element by setting 
+		 * it to null                      O(1)
+		 * Delete an element by shifting   O(n)
+		 */
 		
 	}
 

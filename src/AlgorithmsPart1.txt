@@ -1,0 +1,447 @@
+Algorithms Part 1 
+
+
+Week 1:
+[
+	Steps to developing a usable algorithm.
+	1) Model the Problem.
+	2) Find/Develop an algorithm to slove it. 
+	3) Is it Fast enough?
+	4) Does it fit in Memory?
+	5) Find a way to address the problem.
+	6) Iterate until satisfied. 
+
+
+	Dynamic Conectivity problem:
+	- Reflexive: p is connected to p.
+	- Symmetric: if p is contected to q, then q is connected to p.
+	- Transitive: if p is contected to q and q is contected to r 
+	  then q is contected to r.
+
+	Connected Components Maximal set of objects that are mutually 
+	connected.
+
+	Implementation:
+	Find query: checks if two objects are in the same component.
+
+	Union command: Replace components containing two objects with 
+	their union. 
+
+	Union Find Data Type:
+	Goal. Design efficient data structure for union-find.
+	- Number of Objects N can be huge.
+	- Number of Operations M can be huge.
+	- Find queries and union commands may be intermixed. 
+
+	Quick Find [Data structure]
+
+	Data Structure:
+		Interger array id[] of size n.
+		Interpretation: p and q are connected iff they have the same id.
+
+	Find: Check if p and q have the same id.
+
+	Union: To merge components containing p and q change all entries 
+	whose id equals id[q] to id[q].
+
+	Quick Find Defects:
+	- Union too expensive (N array accesses).
+	- Trees are flat but too expensive to keep them flat. 
+
+
+
+
+	Quick Union [Data structure]
+
+	Data structure:
+		Interger array id[] of size n.
+		Interpretation: id[i] is parent of i. 
+		Root of i is id[id[id[...id[i]...]]].
+
+	 	Find: Check if p and q have the same root.
+
+	 	Union: To merge components containing p and q set the id
+	 	of p's root to the id of q's root.
+
+	Quick Union Defects:
+	- Trees can get tall. 
+	- Find to expensive (could be N array accesses).
+
+
+
+	Weighted Quick Union [Data structure]
+		Modify quick-union to avoid tall trees.
+		Keep track of size of each tree (number of objects).
+		Balance  by linking root of smaller tree to root of larger tree. 
+
+	Data structure:
+		Same as quick-union, but maintain extra array size[i]
+		to count number of objects in the tree rooted at i.
+
+		Find: Check if p and q have the same root.
+
+		Union: Modify quick-union to:
+			Link root of smaller tree to root of larger tree. 
+			Update the size[] array.
+
+	Another improvment that we can make is path compression. Just after 
+	computing the root of p set the id of each examined node to point to 
+	that root. 
+
+
+
+	algorithm 			worst case time.
+	Quick-find			M N
+	Quick-Union         M N
+	Weighted QU         N + M log N
+	QU + PATH COMP      N + M log N
+	Weighted QU + PATH  N + M lg* N
+
+	WQUPC reduces time from 30 years to 6 seconds. 
+
+]
+
+
+
+
+Week 2:
+
+Stacks and Queues
+[
+	Both of these data structures can use the private inner class
+	Node:
+
+	private class Node{
+		String item: // Data to hold.
+		Node next: // Pointer to the next item in the data structure
+	}
+
+
+	Stack: Examime the item most recently added.
+	- LIFO: Last In First Out.
+
+	Stack Operations:
+	void push[Item]: inset a new item at the top of the stack.
+	Item pop[]: return the item at the top of the stack.
+	isEmpty[]: is the stack empty.
+
+	- With these data structures we can also use an array to implement them. 
+
+	- Amortized cost: total cost averaged over the total operations. 
+
+
+
+	Queues: Examine the item least recently added.
+	- FIFO: First In First Out.
+
+	Stack Operations:
+	void enqueue[Item]: insert a new string onto queue.
+	String dequeue[]: remove and return the string least recently added.
+	boolean isEmpty[]: is the queue empty.
+
+
+
+	Generics: A general purpose item when implementing a collection of objects
+
+	- public class Stack<Item>
+
+	- Java does not allow generic array implementation so what you need to do is put
+	a cast in to allow for the implementation. 
+
+	- [Item[]] new Object[capacity];
+
+
+	What to do about primitive types?
+
+	- Each primitive type has a wrapper object type.
+	- Integer is wrapper for int. 
+
+	Autoboxing = Automatic cast between a primitive type and its wrapper. 
+
+]
+
+
+
+Elementary Sorts
+[
+	How can sort[] know how to compare data of type Double, String and file without any information about the type of an item?
+
+	It uses a call back function where the client passes array of objects to sort[] function.
+
+	The sort[] function calls back object's compareTo[] method as needed. 	
+
+
+	Comparable is an interface defining a strategy of comparing an object with other objects
+	of the same type. This is called "natural ordering". We have listed below the example of
+	Total Ordering which is similar for our purposes here but we must note that Total Ordering
+	is a mathmetical concept while "natural ordering" may vary in meaning depending on context.
+
+	Please see for more INFO: https://stackoverflow.com/questions/9176643/difference-between-natural-ordering-and-total-ordering
+
+	All data types that implement the Comparable interfact will have a compareTo[] method.
+	
+
+	Total Order:
+	- is a binary relation that satisfies =<
+
+	Antisymmetry: if v <= w and w <= v. then v == w.
+	Transitivity if v <= w and w <= x then v <= x.
+	Totality: either v <= w or w <= v or both.
+
+	Item: A 
+	Item: B
+
+	if(A < B) return -1 = less
+	if(A > B) return +1 = greater 
+	if(A == B) return 0 = equals
+
+	
+
+	Sort implementation has no dependence on the type of data that is handled by the sort interface.
+
+	Selection Sort:
+	- In interation i, find index min of smallest remaining entry.
+	- Swap a[i] and a[min].
+
+
+	i = 7
+	{7,10,5,3,8,4,2,9,6}
+
+	i = 10
+	{2,10,5,3,8,4,7,9,6}
+
+	i = 5
+	{2,3,5,10,8,4,7,9,6}
+
+	i = 10
+	{2,3,4,10,8,5,7,9,6}
+
+	i = 8
+	{2,3,4,5,8,10,7,9,6}
+
+	i = 10
+	{2,3,4,5,6,10,7,9,8}
+
+	i = 10
+	{2,3,4,5,6,7,10,9,8}
+
+	i = 9
+	{2,3,4,5,6,7,8,9,10}
+
+	i = 10
+	{2,3,4,5,6,7,8,9,10}
+
+
+	Cost: n^2/2
+
+	Algorithm: 
+	- Pointer scans from left to right.
+
+	Invariants:
+	- Entries the left of pointer including pointer fixed and in ascending order.
+
+	- No entry to right of pointer is smaller than any entry to the left of pointer.
+
+
+
+	Insertion Sort:
+	In interation i swap a[i] with each larger enter to its left
+
+	i = 7
+	{7,10,5,3,8,4,2,9,6}
+
+	Algorithm: 
+	- Pointer scans from left to right.
+
+	Invariants:
+	- Entries to the left of Pointer [include Pointer] are in ascending order.
+
+	-Entries to the right of the pointer have not been seen. 
+
+	Cost:
+		- Average Case: 1/4*n^2
+		- Best Case: n - 1
+		- Worst Case: n^2/2
+
+
+	Shell Sort:
+	Move entries more than one position at a time by h sorting the array. 
+
+	- An h sorted array is h interleaved sorted sub sequences.
+
+	L E E A M H L E P S O L T S X R
+	1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4
+
+
+	Sub Sequence 1: L M P T 
+	Sub Sequence 2: E H S S
+	Sub Sequence 3: E L O X 
+	Sub Sequence 4: A E L R
+
+
+	Merge Sort:
+
+	The basic plan is 
+		- Divide array into two halves.
+		- Recursively sort each half.
+		- Merge two halves. 
+
+	Goal. Given two sorted subarrays 
+
+	First Array = array[lo] to array[mid]
+	Second Array = array[mid + 1] to array[hi]
+
+	replace both arrays with a sorted subarray from a[lo] to a[hi]
+
+
+	Main Array:
+	a[]
+
+	SubArray:
+	aux[]
+
+
+	a[] _ _ _ _ _ _ _ _ _ _ 
+	k = runner for the main array.
+
+
+	aux[] E E G M R | A C E R T
+		  i	          j
+
+	i = runner for the first half of the array.
+	j = runner for the second half of the array. 
+
+	What we do here is basically compare i with j and the smaller of the two variables
+	gets put into k and then the smaller value of i and j gets incremented as well as k.
+
+	
+	Sorting Complexity:
+
+	Computational Complexity: Framework to study efficiency of algorithms
+	for solving a particular problem X.
+
+	Model of computation: Allowable operations.
+
+	Cost Model: Operation counts.
+
+	Upper Bound: Cost gurantee provided by some algorithm for X.
+
+	Lower Bound: Proven limit on cost guarantee of all algorithms for X.
+
+	Optimal Algorithm: Algorithm with best possible cost guarantee for X.
+
+
+	Decession Tree for 3 Distinct items A B C
+
+
+				  	       		   (A < B)
+		       Yes           				        	No   
+		     (B < C)                                  (A < C)
+
+		Yes               No                   Yes               No 
+	  [A B C]           (A < C)              [B A C]           (B < C)
+
+	  		  Yes               No                       Yes            No
+	  		[A C B]          [C A B]                   [B C A]        [C B A]
+
+
+	Compare based lower bound for sorting:
+
+	Proof:
+		- Assume array consists of N distinct values a1 through aN.
+		- Worst case dictated by height h of decision tree.
+		- Binary tree of height h has at most 2^h leaves.
+		- N! different orderings => at least N! leaves.
+
+
+	Complexity results in context:
+
+		Comapares: Merge sort is optimal with respect to # compares.
+		Space: Merge sort is not optimal with respect to space usage.
+
+		Lower bound may not hold if the algorithm has information about:
+		- The initial order of the input.
+		- The distribution of key value.
+		- the representation of the keys.
+
+		Partially-ordered arrays: Depending on the initial order of the input,
+		we may not need N lg N comapres.
+
+		Duplicate Keys: Depending on the input distribution of duplicates,
+		we may not need N lg N compares.
+
+		Digital properties of keys: We can use digit/charater comapres instead of
+		key compares for numbers and strings.
+
+
+
+		Comparator interface: sort using an alternate order
+		Decouple the data type from what it means to comapre to objects of that data type.
+
+
+			public interface Comparator<Key>
+			_________________________________
+				int compare(Key v, Key w)
+
+		Required property: MUST BE A TOTOAL ORDER!
+
+
+
+
+
+
+
+		Stability:
+
+		Table Sorted on colum a                   Table Sorted on column b
+
+		Andrews  | 3 | A            				Furia   | 1 | A
+		Battle   | 4 | C                            Rohde   | 2 | A                           
+		Chen     | 3 | A                            CHEN    | 3 | A                        
+		Fox      | 3 | A                            FOX     | 3 | A                          
+		Furia    | 1 | A                            ANDREWS | 3 | A   
+		Gazsi    | 4 | B                            KANGA   | 3 | B                            
+		Kanga    | 3 | B                            Gazsi   | 4 | B                            
+		Rohde    | 2 | A                            Battle  | 4 | C
+
+		Notice how in the second table when it is sorted by the second column the names in the first do not hold their alphabetical order. This is what it is meant by stability.              
+
+		Which sorts are stable?
+
+		Insertion Sort and Merge Sort = Stable
+		Selection Sort and Shell Sort = Not Stable
+
+		Insertion Sort Proof of stability:
+			Equal items never move past each other. 
+
+		Selection Sort Proof of instability:
+			Long distance exchanges might move an item past some
+			equal item. 
+
+
+
+
+	Quick Sort:
+
+	The basic plan is 
+		- Shuffle the array.
+		- Partition so that, for some j
+			- entry a[j] is in place.
+			- no larger entry to the left of j.
+			- no smaller entry to the right of j.
+		- Sort each piece recursively. 
+
+
+	a[] = E C A I E K L P U T M Q R X O S
+
+	- WHERE K IS THE PARTITION 
+	- EVERYTING TO THE LEFT OF K IS LESS THAN IT
+	- EVERYTHING TO THE RIGHT OF K IS GREATER THAN IT 
+
+	i = runner for the first half of the partition. 
+	j = runner for the second half of the partition. 
+
+	What we do here is compare i with j and the smaller of the two variables
+	gets swapped between i and j creating a sorted array. 
+
+]

@@ -33,3 +33,17 @@ O(log^2(n))  Logarithmic base 2
 O(n)		 Linear
 O(nlog^2(n)) n log-star n
 O(n^2)		 Quadratic
+
+
+		/*
+		 * Bubble Sort
+		 * 
+		 * In - Place Algorithm 
+		 * O(n^2) time complexity 
+		 * Algorithm degrades quickly
+		 */
+
+		 
+		 
+		 
+		 

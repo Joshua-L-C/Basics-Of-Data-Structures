@@ -45,6 +45,7 @@ public class HumanSquaringObject {
 		this.ans = (int) ((this.firstDistance * this.secondDistance) + (Math.pow(this.distanceCounter,2)));
 		this.calculationRoll += "\n";
 		this.calculationRoll += "("+this.firstDistance + " * " + this.secondDistance + ") + "+ this.distanceCounter+"^2 = "+ this.ans +"\n";
+		
 	}
 	
 	public static void main(String[] args) {
