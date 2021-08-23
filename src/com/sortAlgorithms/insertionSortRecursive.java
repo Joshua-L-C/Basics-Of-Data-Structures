@@ -34,7 +34,7 @@ public class insertionSortRecursive {
 			
 			x = array.length - 1;
 		}
-		
+		 
 		
 		System.out.print(array[x]+ " ");
 		System.out.println(y);
