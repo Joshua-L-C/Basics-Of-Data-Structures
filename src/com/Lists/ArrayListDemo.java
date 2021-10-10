@@ -13,7 +13,7 @@ public class ArrayListDemo {
 		empList.add(new Employee("Tom","Jane",30));
 		empList.add(new Employee("Bill","Jane",40));
 		
-		
+		 
 		empList.forEach(emp -> System.out.println(emp.toString()));
 		
 		System.out.println(empList.size());
