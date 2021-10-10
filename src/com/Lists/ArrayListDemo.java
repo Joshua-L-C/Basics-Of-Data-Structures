@@ -22,7 +22,7 @@ public class ArrayListDemo {
 		
 		empList.forEach(emp -> System.out.println(emp.toString()));
 		
-		System.out.println(empList.size());
+		System.out.println(empList.size()); 
 		
 		System.out.println();
 		Employee[] employeeArray = empList.toArray(new Employee[empList.size()]);
