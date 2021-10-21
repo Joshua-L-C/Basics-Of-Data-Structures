@@ -68,7 +68,7 @@ public class FoundNumber {
         
     }
     
-    public static void addAtIndex(int[] array, int index, int value) {
+    public static void addAtIndexForward(int[] array, int index, int value) {
     	
     	int holder = array[index];
     	array[index]= value;
@@ -79,13 +79,23 @@ public class FoundNumber {
     		array[runner] = holder;
     		holder = holder2;
     		holder2 = array[runner + 1];
-    		array[runner + 1] = holder2;
-    	}
+    		
     	
+    	}
+    	array[array.length - 1] = holder;
 
 		
     	
     }
+    
+    
+    public static void addIndexBackward(int []array,int index,int value) {
+    	
+    	
+    	//int holder = array[];
+    	
+    }
+    
 	public static void main(String[] args) {
 //		System.out.println(singleNumber(new int[]{-336,513,-560,-481,-174,101,-997,40,-527,-784,-283,-336,513,-560,-481,-174,101,-997,40,-527,-784,-283,354}));
 //		
@@ -99,8 +109,9 @@ public class FoundNumber {
 		int[] insertionArray = new int[]{0,1,2,3,4,5,0,0,0,0,0,0};
 		
 		System.out.println("InsertionArray: " + insertionArray.length);
-		addAtIndex(insertionArray,2,4);
-		addAtIndex(insertionArray,3,7);
+		addAtIndexForward(insertionArray,2,4);
+		addAtIndexForward(insertionArray,3,7);
+		
 		
 		
 		
