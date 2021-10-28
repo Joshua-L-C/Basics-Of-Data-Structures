@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class FoundNumber {
     public static int singleNumber(int[] nums) {
@@ -156,6 +158,8 @@ public class FoundNumber {
     	int runner1 = 0;
     	int runner2 = 0;
     	
+    	Queue<Integer> queue = new LinkedList<Integer>();
+    	
     	int[] array = new int[nums1.length];
     	
     	for(;runner1 != m && runner2 != n;runner++) {
@@ -184,12 +188,189 @@ public class FoundNumber {
     		}
     	}
     	
-    	nums1 = null;
-    	nums1 = array;
+  
     	
-    	for(int i: array) {
+    	
+    	for(int newRunner = 0; newRunner < array.length; newRunner++) {
+    		nums1[newRunner] = array[newRunner];
+    	}
+    }
+    
+    
+    
+    
+ public static void merge2(int[] nums1, int m, int[] nums2, int n) {
+    	
+    	
+    	int runner = 0;
+    	int runner1 = 0;
+    	int runner2 = 0;
+    	
+    	Queue<Integer> queue = new LinkedList<Integer>();
+    	
+    	
+    	
+    	for(; (runner1 != m && runner2 != n) || !queue.isEmpty();) {
+    		
+    	
+    		
+    	}
+    	
+
+    	
+    	//nums1 = null;
+    	//nums1 = array;
+    	
+    	for(int i: nums1) {
     		System.out.println(i);
     	}
+    }
+ 
+ 	public static int removeElementWithQueue(int[] nums, int val) {
+     /*
+         Steps:
+         - Create a loop that will run through the array as well as an index queue
+         - If you see a number that is VAL remove it by making it MAX
+         - Record the index in the index queue
+         - Move on to the next value 
+         
+         Cases:
+         - What if the next value in the queue is a VAL
+         ANS: Just add the value to the index queue
+         
+         - What if its not the VAL
+         ANS: Swap the value at the current index with the index that you 
+         poll off the index queue.Then add the current index to the index queue.
+     */
+ 	   int removed = 0;
+       Queue<Integer> indexQueue = new LinkedList<Integer>();
+       
+       for(int runner = 0; runner < nums.length; runner++){
+           if(indexQueue.isEmpty()){
+               if(nums[runner] == val){
+                   removed++;
+                   nums[runner] = Integer.MAX_VALUE;
+                   indexQueue.add(runner);
+               }
+           }else if(!indexQueue.isEmpty()){
+               if(nums[runner] == val){
+                   removed++;
+                   nums[runner] = Integer.MAX_VALUE;
+                   indexQueue.add(runner);
+               }else if(nums[runner] != val){
+                   int holder = nums[runner];
+                   int index = indexQueue.poll();
+                   nums[index] = holder;
+                   nums[runner] = Integer.MAX_VALUE;
+                   indexQueue.add(runner);
+               }
+               
+           }
+       }
+       
+//       for(int i: nums) {
+//    	   System.out.println(i);
+//       }
+       
+       return removed;
+ 		
+ 	}
+ 	
+ 	public static int removeElementWithPointers(int [] nums, int val) {
+ 		
+// 		for(int runner = 0, otherRunner = 0; runner < nums.length; runner++) {
+// 			System.out.println("Regular Runner");
+// 			System.out.println(nums[runner]);
+// 			System.out.println();
+// 			System.out.println("Other Runner");
+// 			System.out.println(nums[otherRunner++]);
+// 			
+// 		}
+ 		
+ 		if(nums.length == 0) {
+ 			return 0;
+ 		}if(nums.length == 1) {
+ 			
+ 			if(nums[0] == val) {
+ 				return 0;
+ 			}else {
+ 				return 1;
+ 			}
+ 		}
+ 		
+ 		
+ 		
+ 		//return 0;
+ 		int front = 0;
+ 		int back = nums.length - 1;
+ 		int removed = 0;
+ 		
+ 		
+ 		while(front <= back) {
+
+ 			if(nums[front] == val) {
+ 				
+ 				
+ 				if(nums[back] != val) {
+ 					
+ 					
+ 					int holder = nums[back];
+ 					nums[back] = nums[front];
+ 					nums[front] = holder;
+ 					front++;
+ 				}else {
+
+ 					back--;
+ 				}
+ 				
+ 				
+ 				
+ 			}
+ 			
+ 			if(nums[front] != val) {
+ 				front++;
+ 			}
+ 			
+ 			
+ 		}
+ 		
+ 		
+ 		
+ 		for(int runner = nums.length - 1; runner != -1 &&nums[runner] == val ;runner--) {
+ 			removed++;
+ 		}
+ 		
+// 		for(int i: nums) {
+// 			System.out.println(i);
+// 		}
+// 		System.out.println(nums.length - removed);
+ 		
+ 		return nums.length - removed;
+ 	}
+ 	
+ 	
+ 	public static int removeElement2(int[] nums, int val) {
+        int front = 0, back = nums.length-1;
+        while(back >= front){
+            if(nums[front] == val){
+                if(nums[back] != val) {
+                    nums[front++] = nums[back];
+                    nums[back] = val;
+                }else {
+                    back--;
+                }
+            } else{
+                front++;
+            }
+        }
+        
+ 		for(int i: nums) {
+ 			System.out.println(i);
+ 		}
+ 		
+ 		System.out.println(front);
+        
+        return front;
     }
     
 	public static void main(String[] args) {
@@ -277,15 +458,35 @@ public class FoundNumber {
 //				[1,2,2]
 //				3
 
-		int[] nums1 = new int[] {-1,0,0,3,3,3,0,0,0};
-		int[] nums2 = new int[] {1,2,2};
 		
-		merge(nums1, 6,nums2,3);
-		
+//		[1,2,3,0,0,0]
+//				3
+//				[2,5,6]
+//				3
+//		int[] nums1 = new int[] {-1,0,0,3,3,3,0,0,0};
+//		int[] nums2 = new int[] {1,2,2};
+//		
+//		merge(nums1, 6,nums2,3);
+//		
+//		System.out.println();
+//		
+//		//merge2(nums1, 6,nums2,3);
+//		
 //		for(int i : nums1) {
 //			System.out.println(i);
 //		}
-	
+		
+		
+				
+		
+		//int[] nums1 = new int[] {0,1,2,2,3,0,4,2};
+		//int[] nums1 = new int[] {1,2};
+		int[] nums1 = new int[] {2,2};
+		int val = 2;
+		//removeElement(nums1,2);
+		removeElementWithPointers(nums1,val);
+		System.out.println();
+		removeElement2(nums1, val);
 	}
 
 }
