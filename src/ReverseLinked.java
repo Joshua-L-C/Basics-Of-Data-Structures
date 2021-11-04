@@ -38,20 +38,31 @@ public class ReverseLinked {
 	        return frontRunner;
 	  }
 	 
-	 public static ListNode reverse(ListNode head) {
+	 public static int recursiveSum(ListNode head) {
 		 
 		 if(head.next == null) {
-			 
-			 return new ListNode(head.val);
+			
+			return head.val;
 		 }
+	
+		 
+		 int val = head.val + recursiveSum(head.next);
 		 
 		 
-		 ListNode temp = reverse(head.next);
-		 System.out.println(temp.val);
 		 
-		 return null;
+		 return val;
 	 }
 	 
+	 public static ListNode reverse(ListNode node) {
+		 
+		 if(node.next == null) {
+			 return node;
+		 }
+		 
+		 ListNode x = reverse(node.next); 
+		 
+		 return  x;
+	 }
 
 
 	public static void main(String[] args) {
@@ -91,6 +102,16 @@ public class ReverseLinked {
 //		
 //		System.out.println(node.val);
 		
+		
+		//ListNode node = reverse(x1);
+		
+		int val = recursiveSum(x1);
+//		while(node.next != null) {
+//			System.out.println(node.val);
+//			node = node.next;
+//		}
+		
+		System.out.println(val);
 		
 		reverse(x1);
 	}
