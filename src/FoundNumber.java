@@ -1,6 +1,10 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import java.util.TreeSet;
 
 public class FoundNumber {
     public static int singleNumber(int[] nums) {
@@ -780,7 +784,249 @@ public class FoundNumber {
         return nums;
         
     }
+    
+    public List<Integer> findDisappearedNumbersBooleanArraySolution(int[] nums) {
+        
+        /*
+            Steps: 
+            - Create a boolean array that is one element greater than the nums array.
+            - Every time we pick off an element in the nums array we will use it to assign true 
+              the index value of the boolean array. 
+            - After the array is done processing we will run through the boolean array 
+              and see which elements are still false this we will add to a list and return it. 
+        
+            Cases:
+            - []
+            - [1]
+        */
+        
+        
+        if(nums.length == 0){
+            return new ArrayList<Integer>();
+        }
+        
+        boolean[] numbers = new boolean[nums.length + 1];
+        List<Integer> integers = new ArrayList<Integer>();
+        
+        for(int runner = 0; runner < nums.length; runner++){
+            numbers[nums[runner]] = true;
+        }
+        
+        for(int runner = 1; runner < numbers.length; runner++){
+            //System.out.println(runner+" "+numbers[runner]);
+            if(numbers[runner] == false){
+                integers.add(runner);
+            }
+        }
+        
+        return integers;
+    }
  	
+    
+    public static List<Integer> findDisappearedNumbersTreeSetSolution(int[] nums) {
+        
+        /*
+            Steps: 
+            - Create a runner through the nums array.
+            - Create a tree set, if the current element at the current index is not
+              the index + 1 add (index + 1) to the tree set.
+            - but first check to see if index + 1 is already in the tree set if it is 
+              remove it. 
+            - then return all the elements in the tree set. 
+        
+            Cases:
+            - []
+            - [1]
+        */
+        Arrays.sort(nums);
+        TreeSet<Integer> set = new TreeSet<Integer>();
+        List<Integer> list = new ArrayList<Integer>();
+        for(int runner = 0; runner < nums.length; runner++){
+            
+            if(nums[runner] != runner + 1){
+                set.add(runner + 1);
+            }
+            
+            
+            
+        }
+        
+        
+        for(int runner = 0; runner < nums.length; runner++){
+            
+             if(set.contains(nums[runner])){
+                set.remove(nums[runner]);
+            }
+            
+        }
+        
+        Iterator<Integer> iter = set.iterator();
+        while(iter.hasNext()){
+            //System.out.println(iter.next());
+            list.add(iter.next());
+        }
+        
+        
+        return list;
+    }
+    
+    public static List<Integer> findDisappearedNumbersLoopBrokenSolution(int[] nums) {
+        
+        /*
+            Steps: 
+            - Sort the array nums array.
+            - If the value at the current index is not the value (index + 1)
+              search the array until it is found or it reaches the end.
+        
+            Cases:
+            - []
+            - [1]
+        */
+        Arrays.sort(nums);
+        
+        int pointer = 0;
+        boolean found = false;
+        List<Integer> list = new ArrayList<Integer>();
+        int lastInPlaceIndex = 0;
+        for(int runner = 0; runner < nums.length; runner++){
+        
+            if(nums[runner] != runner + 1){
+                pointer = lastInPlaceIndex;
+                
+                while(pointer < nums.length  && nums[pointer] != runner + 1){
+                    
+                    
+                    if(nums[pointer] == runner + 1){
+                        found = true;
+                    }
+                    pointer++;
+                }
+                
+                if(pointer < nums.length && nums[pointer] == runner + 1){
+                    found = true;
+                }
+                
+                if(found == false){
+                    list.add(runner + 1);
+                }
+                
+            }
+            
+            if(nums[runner] != runner + 1) {
+            	lastInPlaceIndex = runner;
+            }
+            
+            found = false;
+            
+        }
+        
+        Iterator iter = list.iterator();
+        while(iter.hasNext()){
+            System.out.println(iter.next());
+        }
+        System.out.println();
+        
+        return list;
+    }
+    
+    
+
+    
+    public static List<Integer> findDisappearedNumbers(int[] nums) {
+        
+        /*
+            Steps: 
+            - Initialize a list 
+            - assign the numbers from 1 to n
+            - check the nums values and if they exits change the values in the list indexes to -1
+            - return all the values that are not - 1
+        
+            Cases:
+            - []
+            - [1]
+        */
+        
+        
+        if(nums.length == 0){
+            return new ArrayList<Integer>();
+        }
+        
+        //boolean[] numbers = new boolean[nums.length + 1];
+        List<Integer> integers = new ArrayList<Integer>();
+        
+        for(int runner = 0; runner < nums.length; runner++){
+            integers.add(runner + 1);
+        }
+        
+        for(int runner = 0; runner < nums.length; runner++){
+        	integers.set(nums[runner] - 1, -1);
+        }
+        
+        //Iterator iter = integers.iterator();
+       
+        Iterator<Integer> it = integers.iterator();
+        while(it.hasNext()) {
+        	if(it.next()==-1) {
+        		it.remove();
+        	}
+        }
+        
+        
+        return integers;
+        
+        }
+    
+    
+    public static int thirdMax(int[] nums) {
+        /*
+            Steps:
+            - Initialize three variables all to the max - 
+            - run through the array of numbers
+            - if the number is greater than the first greatest change the first greatest
+              and shift all the elements down.
+            - if the number is greater than the second greatest and not greater than the first
+              shift them down one
+            - if the number is greater than only the thrid then change the third.
+            - return the third greatest if its not greater than 0 return the first greatest
+            
+        */
+        
+        int first = Integer.MIN_VALUE;
+        int second = Integer.MIN_VALUE;
+        int third = Integer.MIN_VALUE;
+        
+        
+        boolean minValueHit = false;
+        
+        for(int runner = 0; runner < nums.length; runner++){
+        
+        	if(nums[runner] == Integer.MIN_VALUE) {
+        		minValueHit = true;
+        	}
+        	
+            if(first < nums[runner]){
+                third = second;
+                second = first;
+                first = nums[runner];
+            }else if((first > nums[runner]) && second != nums[runner] && second < nums[runner]){
+                third = second;
+                second = nums[runner];
+            }else if((first > nums[runner]) && second > nums[runner] && (second != nums[runner]) && third < nums[runner]){
+                third = nums[runner];   
+            }
+        
+        }
+            
+        if(third != Integer.MIN_VALUE && !(minValueHit)){
+            return third;
+        }if(third == Integer.MIN_VALUE && (minValueHit) && second != Integer.MIN_VALUE) {
+        	return third;
+        }else{
+            return first;
+        }
+        
+        
+    }
 	public static void main(String[] args) {
 		
 		//int[] insertionArray = new int[]{0,1,2,3,4,5,0,0,0,0,0,0};
@@ -801,15 +1047,27 @@ public class FoundNumber {
 		//int[] insertionArray = new int[]{0,2,3,4,5,2,1,0};
 		//int[] insertionArray = new int[]{1,3,2};
 		//int[] insertionArray = new int[]{0,1,2,3,4,5,6,7,8,9};
-		int[] insertionArray = new int[]{1,2,3,4};
-		
+		//int[] insertionArray = new int[]{10,2,5,10,9,1,1,4,3,7};
+		//int[] insertionArray = new int[]{4,3,2,7,8,2,3,1};
+		//int[] insertionArray = new int[]{5,4,6,7,9,3,10,9,5,6};
+		//int[] insertionArray = new int[]{1,2,2,5,3,5};
+		int[] insertionArray = new int[]{1,1,-2147483648};
+
 		//System.out.println(validMountainArray(insertionArray));
 		
-		sortArrayByParity(insertionArray);
+		System.out.println(thirdMax(insertionArray));
 		
-		for(int i : insertionArray) {
-			System.out.println(i);
-		}
+		//sortArrayByParity(insertionArray);
+		//List<Integer> x = findDisappearedNumbers(insertionArray);
+			
+		//Iterator run = x.iterator();
+		
+//		while(run.hasNext()) {
+//			System.out.println(run.next());
+//		}
+//		for(int i : insertionArray) {
+//			System.out.println(i);
+//		}
 		
 		
 		
