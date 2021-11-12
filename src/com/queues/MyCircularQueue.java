@@ -6,93 +6,92 @@ class MyCircularQueue {
 	int tail = -1;
 	int[] array;
 	
+	
+	/*
+     * Function:
+     * Steps:
+     * Cases:
+     * 
+     */
     public MyCircularQueue(int k) {
         this.array = new int[k];
         
     }
     
     
-    //Starting at -1 increase a pointer from zero going down the array and wrapping around.
+    /*
+     * Function:
+     * Steps:
+     * Cases:
+     * 
+     */
     public boolean enQueue(int value) {
-    	
-    	if(!isFull()) {
-	        if(this.tail == -1) {
-	        	
-	        	this.head = 0;
-	        	this.tail = 0;
-	        	
-	        	array[this.tail] = value;
-	        	return true;
-	        	
-	        }else if(this.tail + 1 == this.array.length) {
-	        	
-	        	this.tail = 0;
-	        	array[this.tail] = value;
-	        	
-	        	
-	        	return true;
-	        	
-	        }else {
-	        	
-	        	this.tail++;
-	        	array[this.tail] = value;
-	        	return true;
-	        }
-    	}else {
-    		
-    		if(this.tail + 1 == this.head) {
-    			array[this.tail] = value;
-    		}
-    		
-    		return false;
-    	}
-    	
+    	return false;
     }
     
+    
+    /*
+     * Function:
+     * Steps:
+     * Cases:
+     * 
+     */
     public boolean deQueue() {
-    	
-    	
-    	if(this.head + 1 == this.array.length) {
-    		this.head = 0;
-    		array[this.head] = 0;
-    		return true;
-    	}else if(this.head == -1) {
-    		return false;
-    	}else {
-    		
-    		array[this.head] = 0;
-    		this.head++;
-    		return true;
-    	}
-    	
-    
+    	return false;
     }
     
+    
+    /*
+     * Function:
+     * Steps:
+     * Cases:
+     * 
+     */
     public int Front() {
-        return this.array[this.head];
+    	return -1;
     }
     
+    
+    /*
+     * Function:
+     * Steps:
+     * Cases:
+     * 
+     */
     public int Rear() {
-        return this.array[this.tail];
+        return -1;
     }
     
+    
+    /*
+     * Function:
+     * Steps:
+     * Cases:
+     * 
+     */
     public boolean isEmpty() {
-        if(this.head == -1 && this.tail == -1){
-        	return true;
-        }
-        
+    	return false;
+    }
+    
+    
+    /*
+     * Function:
+     * Steps:
+     * Cases:
+     * 
+     */
+    public boolean isFull() {
         return false;
     }
     
-    public boolean isFull() {
-        if(this.tail + 1 == this.head || (this.tail == array.length - 1 && this.head == 0)) {
-        	return true;
-        }else {
-        	return false;
-        }
-    }
     
     
+    /*
+     * Function:
+     * Steps:
+     * Cases:
+     * 
+     */
     public void printOut() {
     	
     	
@@ -104,19 +103,63 @@ class MyCircularQueue {
     }
     
     public static void main(String [] args) {
-    	MyCircularQueue items = new MyCircularQueue(3);
-    	System.out.println(items.enQueue(1));
-    	System.out.println(items.enQueue(2));
-    	System.out.println(items.enQueue(3));
-    	System.out.println(items.enQueue(4));
+    	MyCircularQueue items = new MyCircularQueue(6);
+    	
+    	/*["MyCircularQueue","enQueue","Rear","Rear","deQueue","enQueue","Rear","deQueue","Front","deQueue","deQueue","deQueue"]
+//    			[[6],[6],[],[],[],[5],[],[],[],[],[],[]]
+    	*/
+    	
+    	items.enQueue(10);
+    	items.enQueue(20);
+    	items.enQueue(30);
     	items.printOut();
-    	System.out.println(items.Rear());
-    	System.out.println(items.isFull());
-    	System.out.println(items.deQueue());
+    	items.deQueue();
+    	items.deQueue();
+    	items.deQueue();
+    	System.out.println();
     	items.printOut();
-    	System.out.println(items.enQueue(4));
+    	System.out.println();
+    	items.enQueue(40);
+    	items.enQueue(50);
+    	items.enQueue(60);
     	items.printOut();
-    	System.out.println(items.Rear());
+    	items.deQueue();
+    	items.deQueue();
+    	items.deQueue();
+    	System.out.println();
+    	items.printOut();
+    	System.out.println();
+    	items.enQueue(70);
+    	items.enQueue(80);
+    	items.enQueue(90);
+    	items.enQueue(100);
+    	System.out.println(items.Front());
+    	items.printOut();
+    	items.deQueue();
+    	items.deQueue();
+    	items.deQueue();
+    	items.deQueue();
+    	System.out.println();
+    	items.printOut();
+//    	System.out.println(items.enQueue(6));
+//    	System.out.println(items.Rear());
+//    	System.out.println(items.Rear());
+//    	System.out.println(items.deQueue());
+//    	System.out.println(items.enQueue(5));
+//    	System.out.println(items.Rear());
+    	
+//    	System.out.println(items.enQueue(1));
+//    	System.out.println(items.enQueue(2));
+//    	System.out.println(items.enQueue(3));
+//    	System.out.println(items.enQueue(4));
+//    	items.printOut();
+//    	System.out.println(items.Rear());
+//    	System.out.println(items.isFull());
+//    	System.out.println(items.deQueue());
+//    	items.printOut();
+//    	System.out.println(items.enQueue(4));
+//    	items.printOut();
+//    	System.out.println(items.Rear());
 //    	for(int runner = 0; runner < 11; runner++) {
 //    		items.enQueue(runner);
 //    	}
