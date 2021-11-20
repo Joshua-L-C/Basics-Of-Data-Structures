@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 
+import com.graphs.NumberOfIslands.Location;
+
 
 
 
@@ -21,6 +23,8 @@ public class NumberOfIslands {
 			this.y = y;
 		}
 	}
+	
+	//Neighbours and boolean array.
 	
 	/* Function: Finds all the conected  and unique '1's this form an Island
 	 * Steps: 
@@ -39,47 +43,113 @@ public class NumberOfIslands {
     public static int numIslands(char[][] grid) {
         
     	Queue<Location> queue = new LinkedList();
-    	Set<Location> visitedMap = new HashSet<Location>();
     	
-    	int step = 0;
+    	
+    	
+    	int numberOfIslands = 0;
+    	
+    	boolean[][] beenTo = new boolean[grid.length][grid[0].length]; 
     	
         for(int row = 0; row < grid.length; row++){
             for(int col = 0; col < grid[row].length; col++){
-                System.out.print(grid[row][col]);
+                //System.out.print(grid[row][col]);
                 
+               
+                if(grid[row][col] == '1' ) {
+                	numberOfIslands++;
+                	
+                	Location initial = new NumberOfIslands().new Location(row, col);
+                	queue.add(initial);
+                	
+                	buildIsland(queue,grid,beenTo);
                 
-                
-                while(!queue.isEmpty()) {
-                	step += 1;
-                	
-                	
-                	int size = queue.size();
-                	
-                	for(int runner  = 0; runner < size; runner++) {
-                		
-                	}
-                	
                 }
                 
                 
                 
             }
             
-            System.out.println();
+            
         }
         
         
-        return 0;
+        
+        
+        return numberOfIslands;
+    }
+    
+    public static void buildIsland(Queue<Location> queue, char[][] grid, boolean[][]beenTo) {
+    	while(!queue.isEmpty()) {
+        	
+        	
+        	int size = queue.size();
+        	
+        	for(int runner  = 0; runner < size; runner++) {
+        		
+        		Location point = queue.poll();
+        		//beenTo[point.x][point.y] = true;
+        		
+        		
+        			Location x;
+        			if(point.x- 1 >= 0 ) {
+        				
+        				if( grid[point.x - 1][point.y] =='1') {
+        					x = new NumberOfIslands().new Location(point.x - 1, point.y);
+        					grid[point.x - 1][point.y] = '0';
+            				queue.add(x);
+        				}
+        				
+        			}
+        			
+        			if(point.x + 1 < grid.length) {
+        				
+        				if( grid[point.x + 1][point.y] =='1') {
+        					x = new NumberOfIslands().new Location(point.x + 1, point.y);
+        					grid[point.x + 1][point.y] = '0';
+            				queue.add(x);
+        				}
+        				
+        			}
+        			
+        			
+        			if(point.y - 1 >= 0) {
+        				
+        				if( grid[point.x ][point.y - 1] =='1') {
+        					x = new NumberOfIslands().new Location(point.x, point.y - 1);
+        					grid[point.x ][point.y - 1] = '0';
+            				queue.add(x);
+        				}
+        				
+        			}
+        			
+        			if(point.y + 1 < grid[0].length ) {
+        				
+        				if(grid[point.x ][point.y + 1] =='1') {
+        					x = new NumberOfIslands().new Location(point.x, point.y + 1);
+        					grid[point.x][point.y + 1] = '0';
+            				queue.add(x);
+        				}
+        				
+        			}
+        			
+        		
+        		
+        		
+        		
+        		
+        	}
+        	
+        }
     }
 	
 	public static void main(String[] args) {
 		
-		char[][] array =         {{'1','1','1','1','0'},
-								  {'1','1','0','1','0'},
-								  {'1','1','0','0','0'},
-								  {'0','0','0','0','0'}};
+		char[][] array =         {{'0','1','0','1','0'},
+								  {'0','0','1','0','0'},
+								  {'0','1','0','0','1'},
+								  {'0','0','0','1','0'}};
 		
-		numIslands(array);
+		System.out.println("Number Of Islands: " + numIslands(array));
 		
 		
 		Set<Location> s = new HashSet();
@@ -97,14 +167,14 @@ public class NumberOfIslands {
 		
 		
 	    HashSet<String> set=new HashSet();  
-        set.add("One");    
+        set.add("1,1");    
         set.add("Two");    
         set.add("Three");   
         set.add("Four");  
         set.add("Five");  
         
         
-        System.out.println(set.contains("Five"));
+        System.out.println(set.contains("1,1"));
         
         
         HashMap<Integer,Integer> map = new HashMap<Integer, Integer>();
