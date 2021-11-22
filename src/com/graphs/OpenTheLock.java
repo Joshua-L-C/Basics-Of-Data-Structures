@@ -11,10 +11,15 @@ public class OpenTheLock {
 		
 		
 		Queue<String> queue = new LinkedList<String>();
-		HashSet<String> visited = new HashSet<String>();
-		HashSet<String> deadEnds = new HashSet<String>(Arrays.asList(deadends));
+		HashSet<String> visited = new HashSet<String>(Arrays.asList(deadends));
 		
+		if (target == "0000")
+            return 0;
+             
+        if (visited.contains("0000"))
+            return -1;
 		
+        
 		char [] lock = {'0','0','0','0'};
 		char [] incrementLock = {'0','0','0','0'};
 		char [] decrementLock = {'0','0','0','0'};
@@ -26,10 +31,13 @@ public class OpenTheLock {
 		
 		while(!queue.isEmpty()) {
 			
-			step += 1;
 			
+			//The size variable must be outside of the loop because
+			//this will determine how many steps we take by going to the queues
+			//prior end and putting in a new end to restart a cycle of new values. 
+			int size = queue.size();
 			
-			for(int runner = 0; runner < queue.size();runner++) {
+			for(int runner = 0; runner < size;runner++) {
 				
 				
 				
@@ -38,7 +46,7 @@ public class OpenTheLock {
 				
 				
 				if(Arrays.equals(lock, target.toCharArray())) {
-					return step;
+					return step; 
 				}
 				
 				for(int secondRunner = 0; secondRunner < 4; secondRunner++) {
@@ -64,6 +72,10 @@ public class OpenTheLock {
 					incrementLock[secondRunner] = (char) (val + '0');
 					decrementLock[secondRunner] = (char) (val2 + '0');
 					
+					if(Arrays.equals(lock, target.toCharArray())) {
+						return step + 1;
+					}
+					
 					if(!visited.contains(new String(incrementLock))) {
 						System.out.println(incrementLock);
 						queue.add(new String(incrementLock));
@@ -79,14 +91,14 @@ public class OpenTheLock {
 				}
 			}
 			
-			
+			step += 1;
 			
 		}
 		
 		
 	
 		
-		return 0;
+		return -1;
 	}
 
 	public static void main(String[] args) {
