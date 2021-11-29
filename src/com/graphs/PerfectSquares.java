@@ -1,8 +1,10 @@
 package com.graphs;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 
 public class PerfectSquares {
 
@@ -46,7 +48,60 @@ public class PerfectSquares {
 	 * 
 	 */
 	
+	static LinkedList l;
 	
+	public static int numSquares(int n) {
+		
+		Queue<Integer> queue = new LinkedList<Integer>();
+		Set<Integer> visitedNumbers = new HashSet<Integer>();
+		l = new LinkedList();
+		l.add(n);
+		
+		int step = 0;
+		queue.add(n);
+		
+		while(!queue.isEmpty()) {
+			step = step + 1;
+			
+			int size = queue.size();
+			
+			for(int runner = 0; runner < size; runner++) {
+				
+				int currentNumber = queue.poll();
+				
+				for(int number = 1; number * number <= currentNumber; number++) {
+					
+					int val = (currentNumber - ( number * number));
+					
+					if(val == 0) {
+						l.add(val);
+						return step;
+					}
+					
+					if(!visitedNumbers.contains(val)) {
+						l.add(val);
+						queue.add(val);
+						visitedNumbers.add(val);
+					}
+					
+					
+					
+				}
+				
+				
+				
+			}
+			
+			
+		}
+		
+		
+		
+		
+		return step;
+		
+		
+	}
 	
 	public static int numSquaresFirstAttempt(int n) {
 		
@@ -111,7 +166,16 @@ public class PerfectSquares {
 	
 	public static void main(String[] args) {
 		
-		System.out.println(numSquaresFirstAttempt(19));
+		int number = 775;
+		
+		System.out.println(numSquaresFirstAttempt(number));
+		
+		System.out.println(numSquares(number));
+		System.out.println();
+		
+		while(!l.isEmpty()) {
+			System.out.println(l.poll());
+		}
 	}
 
 }
