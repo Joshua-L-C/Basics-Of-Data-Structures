@@ -59,12 +59,30 @@ public class ReverseLinked {
 			 return node;
 		 }
 		 
-		 ListNode x = reverse(node.next); 
+		 ListNode n = reverse(node.next); 
+		 node.next.next = node;
+		 node.next = null;
 		 
-		 return  x;
+		 return n;
 	 }
 
-
+	    static ListNode reverseRecursive(ListNode head)
+	    {
+	        if (head == null || head.next == null)
+	            return head;
+	 
+	        /* reverse the rest list and put
+	        the first element at the end */
+	        ListNode rest = reverse(head.next);
+	        head.next.next = head;
+	 
+	        /* tricky step -- see the diagram */
+	        head.next = null;
+	 
+	        /* fix the head pointer */
+	        return rest;
+	    }
+	 
 	public static void main(String[] args) {
 		
 		ListNode x1 = new ListNode();
@@ -103,17 +121,17 @@ public class ReverseLinked {
 //		System.out.println(node.val);
 		
 		
-		//ListNode node = reverse(x1);
+		ListNode node = reverse(x1);
 		
-		int val = recursiveSum(x1);
-//		while(node.next != null) {
-//			System.out.println(node.val);
-//			node = node.next;
-//		}
+		//int val = recursiveSum(x1);
+		while(node.next != null) {
+			System.out.println(node.val);
+			node = node.next;
+		}
 		
-		System.out.println(val);
+		System.out.println(node.val);
 		
-		reverse(x1);
+		//reverse(x1);
 	}
 
 }
