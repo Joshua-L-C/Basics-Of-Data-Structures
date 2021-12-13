@@ -1,6 +1,7 @@
 package com.stack;
 
 import java.util.Hashtable;
+import java.util.Stack;
 
 public class NextGreaterElement {
 	
@@ -83,7 +84,7 @@ public class NextGreaterElement {
      */
     
     
-    public static int[] nextGreaterElement(int[] nums1, int[] nums2) {
+    public static int[] nextGreaterElementHashTable(int[] nums1, int[] nums2) {
     	
     	Hashtable<Integer, Integer> table = new Hashtable<Integer, Integer>();
     	
@@ -111,6 +112,68 @@ public class NextGreaterElement {
     	
     	return ans;
     	
+    }
+    
+    
+    /**
+     * Function: for all the given values in nums1 the position of each value in num2
+	 * and return the value that is greater than it to the right of the value in num2 
+	 * if there is no greater value return -1
+     * 
+     * Steps:
+     * 	- Create a stack object
+     *  - Start a loop for the first element in the second array nums2
+     *  - If the first number in the loop push it onto the stack.
+     *  - If the number is greater than the number at the top of the stack keep poping elements off 
+     *    until they are not greater.
+     *  - for each element that is being popped off check it against the elements in num1 and if they are the same
+     *   up date the current element with what we are pushing onto the stack 
+     * 
+     * 
+     * @param args
+     */
+    public static int[] nextGreaterElement(int[] nums1, int[] nums2) {
+    	
+    	Stack<Integer> stack = new Stack<Integer>();
+    	int[] ans = new int[nums1.length];
+    	for(int indx = 0; indx < nums2.length; indx++) {
+    		
+    		if(indx == 0) {
+    			stack.push(nums2[indx]);
+    		}else {
+    			
+    			if(!stack.isEmpty() && stack.peek() < nums2[indx]) {
+    				
+    				while(!stack.isEmpty() && stack.peek() < nums2[indx]) {
+    					
+    					int val = stack.pop();
+    					
+    					for(int runner = 0; runner < nums1.length; runner++) {
+    						if(val == nums1[runner]) {
+    							ans[runner] = nums2[indx];
+    						}
+    					}
+    					
+    				}
+    				
+    				stack.push(nums2[indx]);
+    			}else {
+    				stack.push(nums2[indx]);
+    			}
+    			
+    		}
+    		
+    	}
+    	
+    	
+    	for(int runner = 0 ; runner < nums1.length; runner++) {
+			if(ans[runner] == 0) {
+				ans[runner] = -1;
+			}
+		}
+    	
+    	
+    	return ans;
     }
     
     

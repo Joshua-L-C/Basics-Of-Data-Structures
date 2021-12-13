@@ -1,0 +1,7 @@
+
+
+88 93 37 20 32 79 48 22 49 92 
+Monotonic Increasing Forwards: [20, 22, 49, 92]
+Monotonic Decreasing Forwards: [93, 92]
+Monotonic Increasing Backwards: [20, 37, 88]
+Monotonic Decreasing Backwards: [93, 88]
