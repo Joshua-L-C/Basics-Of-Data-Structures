@@ -84,6 +84,28 @@ public class MergeLinkedList {
 		 return head;
 	       
 	 }
+	 
+	 public static int timestables(int x,int n) {
+		 
+		 
+		
+		     if(n == 0) {
+		    	 
+				 return 0;
+			 }
+		     
+			 timestables(x,(n - 1));
+			 System.out.println("Number " + x + " times " + n + " = " +x*n);
+			 
+			 while(x < 10 && n == 10) {
+				 x++;
+				 timestables(x,(n - 1));
+			 }
+		     
+			 
+			 return 0;
+		 
+	 }
 	
 	public static void main(String[] args) {
 		
@@ -116,6 +138,10 @@ public class MergeLinkedList {
 			head = head.next;
 		}
 		System.out.println(head.val);
+		
+		timestables(2, 10);
+		
+		
 	}
 
 }
