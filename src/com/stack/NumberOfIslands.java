@@ -1,5 +1,7 @@
 package com.stack;
 
+import java.util.Stack;
+
 public class NumberOfIslands {
 
 	
@@ -35,7 +37,7 @@ public class NumberOfIslands {
 	                if(grid[row][col] == '1') {
 	                	numberOfIslands++;
 	                
-	                	buildIsland(grid, row, col);
+	                	buildIslandDFS(grid, row, col);
 	                
 	                }
 	                
@@ -49,8 +51,43 @@ public class NumberOfIslands {
 	        return numberOfIslands;
 	    }
 	 
+
+	    public static void buildIslandDFS(char [][] grid, int row, int col) {
+	        
+	       Stack<int[]> stack = new Stack<int[]>(); 
+	       
+	        stack.push(new int[]{row,col});
+	        
+	        
+	        while(!stack.isEmpty()){
+	            
+	        	int[] currentPoint = stack.pop();
+	        	
+	        	grid[currentPoint[0]][currentPoint[1]] = '0';
+	        	
+	        	
+	        	if(currentPoint[0] - 1 >= 0 && grid[currentPoint[0] - 1][currentPoint[1]] == '1') {
+	        		stack.push(new int[] {currentPoint[0] - 1, currentPoint[1]});
+	        	}
+	        	
+	        	if(currentPoint[0] + 1 < grid.length && grid[currentPoint[0] + 1][currentPoint[1]] == '1') {
+	        		stack.push(new int[] {currentPoint[0] + 1, currentPoint[1]});
+	        	}
+	        	
+	        	if(currentPoint[1] - 1 >= 0 && grid[currentPoint[0] ][currentPoint[1] - 1] == '1') {
+	        		stack.push(new int[] {currentPoint[0], currentPoint[1] - 1});
+	        	}
+	        	
+	        	if(currentPoint[1] + 1 < grid[0].length  && grid[currentPoint[0]][currentPoint[1] + 1] == '1') {
+	        		stack.push(new int[] {currentPoint[0], currentPoint[1] + 1});
+	        	}
+	        	
+	        }
+	        
+	        
+	    }
 	 
-	 public static void buildIsland(char [][] grid, int row, int col) {
+	 public static void buildIslandDFSRecursive(char [][] grid, int row, int col) {
 		 
 		 
 		 if(row < 0 || row >= grid.length || col < 0 || col >= grid[0].length || grid[row][col] != '1') {
@@ -59,21 +96,21 @@ public class NumberOfIslands {
 		 
 		 grid[row][col] = '0';
 		 
-		 buildIsland(grid, row + 1, col);
-		 buildIsland(grid, row, col + 1);
-		 buildIsland(grid, row - 1, col);
-		 buildIsland(grid, row, col - 1);
+		 buildIslandDFSRecursive(grid, row + 1, col);
+		 buildIslandDFSRecursive(grid, row, col + 1);
+		 buildIslandDFSRecursive(grid, row - 1, col);
+		 buildIslandDFSRecursive(grid, row, col - 1);
 	 }
 	
 	
 	public static void main(String[] args) {
 		
 		char[][] array = {{'1','1','1','1','0'},
-				  {'1','1','0','1','0'},
-				  {'1','1','0','0','0'},
-				  {'0','0','0','0','0'}};
+				  		  {'1','1','0','1','0'},
+				  		  {'1','1','0','0','0'},
+				  		  {'0','0','0','0','0'}};
 
-System.out.println("Number Of Islands: " + numIslands(array));
+		System.out.println("Number Of Islands: " + numIslands(array));
 
 	}
 
