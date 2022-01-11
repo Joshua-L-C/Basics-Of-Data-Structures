@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 
 public class KeysAndRooms {
 	
@@ -47,6 +48,30 @@ public class KeysAndRooms {
         return rooms.size() - visited.size() == 0;
     }
     
+    public static boolean canVisitAllRoomsDFS(ArrayList<ArrayList<Integer>> rooms) {
+    	
+    	Stack<Integer> stack = new Stack<Integer>();
+    	Set<Integer> visited = new HashSet<Integer>();
+    	
+    	stack.push(0);
+    	
+    	while(!stack.isEmpty()) {
+    		int currentNode = stack.pop();
+    		visited.add(currentNode);
+    		for(int runner = 0; runner < rooms.get(currentNode).size();runner++) {
+    			if(!visited.contains(rooms.get(currentNode).get(runner))) {
+    				stack.push(rooms.get(currentNode).get(runner));
+    				
+    			}
+    		}
+    		
+    		
+    	}
+    	
+    	return rooms.size() - visited.size() == 0;
+    }
+    
+    
 	public static void main(String[] args) {
 		//[[2],[4,3],[1],[],[]]
 
@@ -57,7 +82,7 @@ public class KeysAndRooms {
 		test.add(new ArrayList<Integer>(Arrays.asList()));
 		test.add(new ArrayList<Integer>(Arrays.asList()));
 		
-		System.out.println(canVisitAllRooms(test));
+		System.out.println(canVisitAllRoomsDFS(test));
 
 	}
 

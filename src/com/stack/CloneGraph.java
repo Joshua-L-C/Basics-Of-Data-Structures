@@ -77,58 +77,7 @@ public class CloneGraph {
 	    
 	    
 	    
-	    public static boolean validPath(int n, int[][] edges, int start, int end) {
-	    	
-	    	Queue<Integer> queue = new LinkedList<Integer>();
-	    	HashSet<int []> set = new HashSet<int []>();
-	    	
-	    	
-	    	queue.add(start);
-	    	
-	    	
-	    	while(!queue.isEmpty()){
-	    		
-	    		int size = queue.size();
-	    		
-	    		for(int runner = 0; runner < size; runner++) {
-	    			
-	    			int currentVertex = queue.poll();
-	    			
-	    			for(int edgeRunner = 0; edgeRunner < edges.length; edgeRunner++) {
-	    				if(!set.contains(edges[edgeRunner])) {
-	    					if(edges[edgeRunner][0] == currentVertex) {
-		    					
-	    						
-	    						if(edges[edgeRunner][1] == end) {
-	    							return true;
-	    						}
-		    					
-		    					queue.add(edges[edgeRunner][1]);
-		    					set.add(edges[edgeRunner]);
-		    					
-		    					
-		    					
-		    					
-		    					
-		    				}else if(edges[edgeRunner][1] == currentVertex ) {
-		    					
-		    					if(edges[edgeRunner][1] == end) {
-		    						return true;
-	    						}
-		    					
-		    					queue.add(edges[edgeRunner][0]);
-		    					set.add(edges[edgeRunner]);
-		    					//System.out.println("test");
-		    				}
-	    				}
-	    				
-	    			}
-	    			
-	    		}
-	    	}
-	    	
-	    	return false;
-	    }
+	    
 	    
 	    public static int findTargetSumWays(int[] nums, int target) {
 	        
@@ -187,7 +136,7 @@ public class CloneGraph {
 		}
 		
 		System.out.println("Test");
-		System.out.println(validPath(6,new int[][]{{0,1},{1,2},{2,3},{0,5},{2,4}}, 1, 4));
+		//System.out.println(validPath(6,new int[][]{{0,1},{1,2},{2,3},{0,5},{2,4}}, 1, 4));
 		
 		
 		findTargetSumWays(new int[] {1,1,1,1,1},3);

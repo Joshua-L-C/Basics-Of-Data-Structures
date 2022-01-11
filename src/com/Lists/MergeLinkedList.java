@@ -32,55 +32,92 @@ public class MergeLinkedList {
 	 *  - then just copy over the remainder of the other list
 	 * 
 	 */
+	
 	 public static ListNode mergeTwoLists(ListNode list1, ListNode list2) {
 		 
-	     ListNode head;  
+		 if(list1 == null && list2 != null) {
+			 return list2;
+		 }
 		 
+		 if(list1 != null && list2 == null) {
+			 return list1;
+		 }
+		 
+		 
+		 if(list1 == null && list2 == null) {
+			 return null;
+		 }
+		 
+		 
+		 
+	     ListNode head = null;
+	     ListNode runningHead = head;
+	     
 	     if(list1.val > list2.val) {
 	    	 head =  new MergeLinkedList().new ListNode(list2.val);
 	    	 list2 = list2.next;
+	    	 
 	     }else {
 	    	 head = new MergeLinkedList().new ListNode(list1.val);
 	    	 list1 = list1.next;
+	    	 
 	     }
 		 
 	     ListNode runnerHead = head;
 	     
-	     while(list1.next != null && list2.next != null) {
-	    	 
-	    	 if(list1.val > list2.val) {
+	     while(list1 != null && list2 != null) {
+
+	    	 if(list1.val < list2.val) {
+	    		 
+	    		 runnerHead.next = list1;
+	    		 runnerHead = runnerHead.next;
+	    		 
+	    		 list1 = list1.next;
+	    	 }else if(list1.val > list2.val) {
 	    		 runnerHead.next = list2;
 	    		 runnerHead = runnerHead.next;
-	    	     list2 = list2.next;
-	    	 }else {
-	    		 runnerHead.next = list1;
+	    		 
+	    		 
+	    		 list2 = list2.next;
+	    	 }else if(list1.val == list2.val){
+                 runnerHead.next = list1;
 	    		 runnerHead = runnerHead.next;
-		    	 list1 = list1.next;
-		     }
-	     }
-	     
-	     if(list1.next != null) {
-	    	 while(list1.next != null) {
-	    		 runnerHead.next = list1;
-	    		 runnerHead = runnerHead.next;
-		    	 list1 = list1.next;
-	    	 }
-	    	 runnerHead.next = list1;
-	    	 runnerHead = runnerHead.next;
-	    	 runnerHead.next = list2;
-	     }
-	     
-	     if(list2.next != null) {
-	    	 while(list2.next != null) {
+	    		 list1 = list1.next;
+	    		 
+	    		 
 	    		 runnerHead.next = list2;
 	    		 runnerHead = runnerHead.next;
 	    		 list2 = list2.next;
-	    	 }
-	    	 runnerHead.next = list2;
-	    	 runnerHead = runnerHead.next;
-	    	 runnerHead.next = list1;
+             }
+	    		 
+	    	 
+	    	 
+	    	 
 	     }
+
+	     if(list1 != null ) {
+	    	 while(list1 != null) {
+	    		 
+	    		 runnerHead.next = list1;
+	    		 runnerHead = runnerHead.next;
+		    	 list1 = list1.next;
+	    	 }
+	     }
+     
+	     if(list2 != null ) {
+    	 	while(list2 != null) {
+    		 
+    		 runnerHead.next = list2;
+    		 runnerHead = runnerHead.next;
+    		 list2 = list2.next;
+    	 }
+
+    	
+     }
+	     
+	     
 		 
+	  
 		 return head;
 	       
 	 }
@@ -110,15 +147,15 @@ public class MergeLinkedList {
 	public static void main(String[] args) {
 		
 		ListNode first = new MergeLinkedList().new ListNode(1);
-		first.next = new MergeLinkedList().new ListNode(3);
+		first.next = new MergeLinkedList().new ListNode(2);
 		first.next.next = new MergeLinkedList().new ListNode(4);
-		first.next.next.next = new  MergeLinkedList().new ListNode(8);
+//		first.next.next.next = new  MergeLinkedList().new ListNode(8);
 		
 		ListNode second = new MergeLinkedList().new ListNode(2);
-		second.next = new MergeLinkedList().new ListNode(5);
-		second.next.next = new MergeLinkedList().new ListNode(6);
-		second.next.next.next = new  MergeLinkedList().new ListNode(7);
-		
+		second.next = new MergeLinkedList().new ListNode(3);
+		second.next.next = new MergeLinkedList().new ListNode(4);
+//		second.next.next.next = new  MergeLinkedList().new ListNode(7);
+//		
 		
 		
 //		while(first.next != null) {
@@ -138,8 +175,8 @@ public class MergeLinkedList {
 			head = head.next;
 		}
 		System.out.println(head.val);
-		
-		timestables(2, 10);
+//		
+//		timestables(2, 10);
 		
 		
 	}

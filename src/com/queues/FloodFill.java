@@ -3,6 +3,7 @@ package com.queues;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class FloodFill {
 	
@@ -14,6 +15,52 @@ public class FloodFill {
 			this.x = x;
 			this.y = y;
 		}
+	}
+	
+	
+	public static int[][] floodFillStack(int [][] image, int sr, int sc, int newColor){
+		
+		Stack<int[]> stack = new Stack<int[]>();
+		
+		stack.add(new int[] {sr,sc});
+		int oldColor = image[sr][sc];
+		
+		
+		while(!stack.isEmpty()) {
+			
+			int[] currentNode = stack.pop();
+			
+			if(image[currentNode[0]][currentNode[1]] == oldColor) {
+				image[currentNode[0]][currentNode[1]] = newColor;
+			}
+			
+			
+			if(currentNode[0] - 1 >= 0 && image[currentNode[0] - 1][currentNode[1]] == oldColor) {
+				
+				stack.push(new int[] {currentNode[0] - 1, currentNode[1]});
+				
+			}
+			
+			if(currentNode[0] + 1 < image.length && image[currentNode[0] + 1][currentNode[1]] == oldColor) {
+				
+				stack.push(new int[] {currentNode[0] + 1, currentNode[1]});
+			}
+			
+			if(currentNode[1] - 1 >= 0 && image[currentNode[0]][currentNode[1] - 1] == oldColor) {
+				
+				stack.push(new int[] {currentNode[0], currentNode[1] - 1});
+			}
+			
+			if(currentNode[1] + 1  < image[0].length && image[currentNode[0] ][currentNode[1] + 1] == oldColor) {
+				
+				stack.push(new int[] {currentNode[0], currentNode[1] + 1});
+			}
+			
+			
+		}
+		
+		
+		return image;
 	}
 	
     public static int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
@@ -117,7 +164,7 @@ public class FloodFill {
 		
 		System.out.println(Arrays.deepToString(image));
 		
-		image = floodFill(image, 0,0,-1);
+		image = floodFillStack(image, 0,0,-1);
 		
 		System.out.println(Arrays.deepToString(image));
 		
