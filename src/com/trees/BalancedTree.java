@@ -13,12 +13,12 @@ public class BalancedTree {
 
 	        
 	        
-	        int x = getHeightOfTree(root.left);
+	        int x = getHeightOfTree(root.leftChild);
 	        
 	        System.out.println("Left Side: "+x);
 	        
 	        
-	        int y = getHeightOfTree(root.right);
+	        int y = getHeightOfTree(root.rightChild);
 	        
 	        System.out.println("Left Side: "+y);
 	        return false;
@@ -46,7 +46,7 @@ public class BalancedTree {
 	    	
 	        
 	        //return num;
-	        return 1 + TreeSize(node.left,count) + TreeSize(node.right,count);
+	        return 1 + TreeSize(node.leftChild,count) + TreeSize(node.rightChild,count);
 	    }
 	    
 	    
@@ -55,23 +55,23 @@ public class BalancedTree {
 	          return -1;
 	        }
 	        
-	        return Math.max(getHeightOfTree(node.left), getHeightOfTree(node.right)) + 1;
+	        return Math.max(getHeightOfTree(node.leftChild), getHeightOfTree(node.rightChild)) + 1;
 	      }
 	    
 	    
 	    
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(null,null,1);
-		root.left = new TreeNode(null,null,2);
-		root.left.left = new TreeNode(null,null,4);
-		root.left.right = new TreeNode(null,null,5);
-		root.left.right.left = new TreeNode(null,null,9);
-		root.left.right.left.left = new TreeNode(null,null,10);
+		root.leftChild = new TreeNode(null,null,2);
+		root.leftChild.leftChild = new TreeNode(null,null,4);
+		root.leftChild.rightChild = new TreeNode(null,null,5);
+		root.leftChild.rightChild.leftChild = new TreeNode(null,null,9);
+		root.leftChild.rightChild.leftChild.leftChild = new TreeNode(null,null,10);
 		
 		
-		root.right = new TreeNode(null,null,3);
-		root.right.right = new TreeNode(null,null,6);
-		root.right.right.left = new TreeNode(null,null,7);
+		root.rightChild = new TreeNode(null,null,3);
+		root.rightChild.rightChild = new TreeNode(null,null,6);
+		root.rightChild.rightChild.leftChild = new TreeNode(null,null,7);
 		
 		isBalanced(root);
 		
