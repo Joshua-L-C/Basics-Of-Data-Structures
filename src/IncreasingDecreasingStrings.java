@@ -8,7 +8,7 @@ public class IncreasingDecreasingStrings {
 	        
 	        for(int runner = 0; runner < s.length(); runner++){
 	            //System.out.println(s.charAt(runner)+":"+((int)s.charAt(runner) - 97));
-	            charArray[(int)s.charAt(runner) - 97] += 1;
+	            charArray[s.charAt(runner) - 97] += 1;
 	        }
 	        
 	        boolean stillBuilding = true;

@@ -1,5 +1,4 @@
 
-import java.util.Collections;
 
 public class PermutationsExample<T> {
 

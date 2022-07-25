@@ -25,6 +25,7 @@ public class EmployeeNode {
 		this.next = next;
 	}
 	
+	@Override
 	public String toString() {
 		return employee.toString();
 	}

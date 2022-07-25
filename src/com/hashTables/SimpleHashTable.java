@@ -1,7 +1,6 @@
 package com.hashTables;
 
 import com.Lists.Employee;
-import com.Lists.EmployeeDoublyLinkedList;
 
 public class SimpleHashTable {
 	

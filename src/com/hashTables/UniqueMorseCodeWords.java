@@ -121,6 +121,7 @@ public class UniqueMorseCodeWords {
 		Arrays.sort(testerHolder, new Comparator<char[]>() {
 
 			
+			@Override
 			public int compare(char[] o1, char[] o2) {
 				// TODO Auto-generated method stub
 				if(o1.length > o2.length) {

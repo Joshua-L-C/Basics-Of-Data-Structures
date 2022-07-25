@@ -3,9 +3,9 @@ package com.trees;
 public class TreeNode {
 
 	int val;
-	TreeNode leftChild;
+	TreeNode left;
 
-	TreeNode rightChild;
+	TreeNode right;
 
 	TreeNode() {
 	}
@@ -16,8 +16,8 @@ public class TreeNode {
 
 	TreeNode(TreeNode left, TreeNode right, int val) {
 		this.val = val;
-		this.leftChild = left;
-		this.rightChild = right;
+		this.left = left;
+		this.right = right;
 	}
 
 	public int getVal() {
@@ -29,19 +29,19 @@ public class TreeNode {
 	}
 
 	public TreeNode getLeftChild() {
-		return leftChild;
+		return left;
 	}
 
 	public void setLeftChild(TreeNode leftChild) {
-		this.leftChild = leftChild;
+		this.left = leftChild;
 	}
 
 	public TreeNode getRightChild() {
-		return rightChild;
+		return right;
 	}
 
 	public void setRightChild(TreeNode rightChild) {
-		this.rightChild = rightChild;
+		this.right = rightChild;
 	}
 	
 	public void insert(int value) {
@@ -51,30 +51,30 @@ public class TreeNode {
 		
 		
 		if(value < val) {
-			if(leftChild == null) {
-				leftChild = new TreeNode(value);
+			if(left == null) {
+				left = new TreeNode(value);
 			}else {
-				leftChild.insert(value);
+				left.insert(value);
 			}
 		}else if(value > val) {
-			if(rightChild == null) {
-				rightChild = new TreeNode(value);
+			if(right == null) {
+				right = new TreeNode(value);
 			}else {
-				rightChild.insert(value);
+				right.insert(value);
 			}
 		}
 	}
 	
 	public void traverseInOrder() {
 		
-		if(leftChild != null) {
-			leftChild.traverseInOrder();
+		if(left != null) {
+			left.traverseInOrder();
 		}
 		
 		System.out.println("Data: " + val);
 		
-		if(rightChild != null) {
-			rightChild.traverseInOrder();
+		if(right != null) {
+			right.traverseInOrder();
 		}
 		
 	}
@@ -86,12 +86,12 @@ public class TreeNode {
 		
 		
 		if(value < val) {
-			if(leftChild != null) {
-				return leftChild.get(value);
+			if(left != null) {
+				return left.get(value);
 			}
 		}else if(value > val) {
-			if(rightChild != null) {
-				return rightChild.get(value);
+			if(right != null) {
+				return right.get(value);
 			}
 			
 		}else {
@@ -102,24 +102,24 @@ public class TreeNode {
 	}
 	
 	public int min() {
-		if(leftChild == null) {
+		if(left == null) {
 			return val;
 		}
 		
 		//int data = leftChild.min(); 
 		
-		return leftChild.min();
+		return left.min();
 	}
 	
 	
 	public int max() {
-		if(rightChild == null) {
+		if(right == null) {
 			return val;
 		}
 		
 		//int data = rightChild.max();
 		
-		return rightChild.max();
+		return right.max();
 	}
 	
 	
