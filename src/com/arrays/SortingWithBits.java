@@ -1,10 +1,71 @@
 package com.arrays;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.TreeMap;
 
 public class SortingWithBits {
 	
-    public static int[] sortByBits(int[] arr) {
+public static int[] sortByBits(int[] arr) {
+        
+        Arrays.sort(arr);
+        
+        TreeMap<Integer,ArrayList<Integer>> map = new TreeMap<Integer,ArrayList<Integer>>();
+        
+        map.put(0,new ArrayList<Integer>());
+        map.put(1,new ArrayList<Integer>());
+        map.put(2,new ArrayList<Integer>());
+        map.put(3,new ArrayList<Integer>());
+        map.put(4,new ArrayList<Integer>());
+        map.put(5,new ArrayList<Integer>());
+        map.put(6,new ArrayList<Integer>());
+        map.put(7,new ArrayList<Integer>());
+        map.put(8,new ArrayList<Integer>());
+        map.put(9,new ArrayList<Integer>());
+        map.put(10,new ArrayList<Integer>());
+        map.put(11,new ArrayList<Integer>());
+        map.put(12,new ArrayList<Integer>());
+        map.put(13,new ArrayList<Integer>());
+        
+        int holderValue = 0;
+        
+        for(int index = 0; index < arr.length; index++){
+            holderValue = Integer.bitCount(arr[index]);
+            map.get(holderValue).add(arr[index]);
+        }
+        
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        int index = 0;
+        
+        for(ArrayList<Integer> val : map.values()){
+            
+            
+            //System.out.println("Current Index: " + index);
+            
+            for(Integer x: val){
+                list.add(x);
+                
+                
+                //System.out.print(x + " ");
+            }
+            
+            index++;
+            //System.out.println();
+            
+        }
+        
+        
+        int[] vals = new int[list.size()];
+        for(index = 0; index < list.size(); index++){
+            vals[index] = list.get(index);
+        }
+        
+        return list.stream().mapToInt(i -> i).toArray();
+        //return list.toArray(new Integer[list.size()]);
+        //return vals;
+    }
+	
+    public static int[] sortByBits2(int[] arr) {
         
         
         int[] array = new int[10001];

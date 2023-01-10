@@ -1,0 +1,89 @@
+Hash Table Notes:
+
+
+
+
+
+Chaning:
+- Strat for dealing with collisions. 
+- Instead of Storing the value directly in the array attached to the Hashtable
+each array position contains a linked list. 
+
+* Not Accurate but needs to be drawn out.
+[ {1,2,3} , {2,3,5} , {3,4,5,6,7} ,{7,8,9} ]
+
+Time Complexity: Worst Case all the instances would have the same hashed value
+so [{},{},{},{1,2,3,4,5,6,7,8,98,42,3},{},{}]. Worst case is Linear Time.
+Everything is dependent on the Hashing function. If the Hashing function results
+in a lot of collisions you are going to have a lot of issues with time complexity.
+
+For an ideal scenario it will be  O(1 + k) 
+
+Also dependent on the Load factor squeezing 100 values in an array of 10 is going to
+give you worse performance than 100 values in an array of 50 assuming you have a good
+Hashing fucntion to begin with. 
+
+ 
+MAP -> HASH MAP -> 
+
+- Java's HashMap implementation can set the load factor of the MAP.
+
+- With the LinkedHashMap you have a method called removeEldestEntry this will allow you to
+determine if you should delete the oldest entry. Used when Hashmap is used as a cache. 
+
+HashTable VS HashMap
+- cannot add NULL key or values into a HashTable.
+- HashTables are Synchronized while HashMaps are Asynchronized. 
+
+Bucket Sort
+
+- Uses Hashing
+- Makes assumptions about the data like radix and counting sort.
+- Because it makes assumptions can sort in O(n) time
+- Performs best when hashed values of items being sorted are evenly
+  distributed so that there aren't many collisions. 
+ 
+NOTE: The only way this works is if all the values in bucket X and greater than
+the values in bucket X - 1 and are less than the values in bucket X + 1.
+
+This means that the hash function we use must meet this requirement. 
+
+Good Example Bucket Sort Possible here Sorted by the number in their tens column
+[54,46,83,66,95,92,43]
+[[],[],[],[],[46,43],[54],[66],[],[83],[95,92]]
+
+Bad Example
+[[1,4,3] [2,5,6] [7,849,9,-1] ]
+
+More about Bucket Sort
+- Not in place
+- Stability will depend on sort algorithm used to sort the buckets
+  ideally you want a stable sort.
+- To Achieve O(n), must have only one item per bucket. 
+- Insertion sort is often used to sort the buckets, because its fast when
+  number of items is small.
+  
+
+
+  
+  
+  Here are a few disadvantages of bucket sort:
+
+    - As mentioned above, you can't apply it to all data types because 
+      you need a good bucketing scheme.
+    
+    - Bucket sort's efficiency is sensitive to the distribution of the 
+      input values, so if you have tightly-clustered values, it's not worth it.
+      
+    - In many cases where you could use bucket sort, you could also use another 
+      specialized sorting algorithm like radix sort, counting sort, or burstsort 
+      instead and get better performance.
+      
+    - The performance of bucket sort depends on the number of buckets chosen, 
+      which might require some extra performance tuning compared to other 
+      algorithms.
+  
+Always use the parent interface as the type so you can change the implementation of 
+the object. 
+
+

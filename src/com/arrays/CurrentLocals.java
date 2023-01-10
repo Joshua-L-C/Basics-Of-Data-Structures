@@ -1,5 +1,7 @@
 package com.arrays;
 
+import java.util.ArrayList;
+
 public class CurrentLocals {
 	public static int[][] largestLocal(int[][] grid) {
         int[][] maxLocal = new int[grid.length - 2][grid.length - 2];
@@ -345,6 +347,12 @@ public class CurrentLocals {
 			
 			System.out.println();
 		}
+		
+		
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		list.get(0);
+		list.add(0, 100);
+		
 	}
 
 }

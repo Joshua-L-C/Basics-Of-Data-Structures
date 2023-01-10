@@ -54,6 +54,19 @@ public class SimpleHashTable {
 		
 		Employee employee = hashtable[hashedKey].employee;
 		hashtable[hashedKey] = null;
+		
+		StoredEmployee[] oldHashTable = hashtable;
+		hashtable = new StoredEmployee[oldHashTable.length];
+		
+		for(int indx = 0; indx < oldHashTable.length; indx++) {
+			
+			if(oldHashTable[indx] != null) {
+				put(oldHashTable[indx].key,oldHashTable[indx].employee);
+			}
+				
+		}
+		
+		
 		return employee;
 	}
 	
@@ -117,7 +130,8 @@ public class SimpleHashTable {
         ht.put("Jones", janeJones);
         ht.put("Doe", johnDoe);
         ht.put("Wilson", mikeWilson);
-        ht.put("Wilson", johnWilson);
+        ht.put("Smith", marySmith);
+        //ht.put("Wilson", johnWilson);
         ht.put("End", billEnd);
         
         
@@ -134,6 +148,8 @@ public class SimpleHashTable {
         System.out.println();
         
         ht.printHashtable();
+        
+        System.out.println("Retrieve Key Jones: " + ht.get("Smith"));
         
 	}
 
